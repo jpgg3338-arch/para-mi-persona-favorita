@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti, amor a distancia 💌</title>
+    <title>Para mi amor a distancia 💕</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -14,24 +14,20 @@
 
         body {
             background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
-            position: relative;
-        }
-
-        .card {
             background: white;
-            padding: 40px;
+            padding: 35px;
             border-radius: 40px;
             box-shadow: 0 20px 60px rgba(255, 182, 193, 0.4);
             border: 4px solid #ffdeeb;
@@ -50,71 +46,85 @@
             }
         }
 
-        .chiikawa-main {
-            width: 200px;
+        /* CHIIKAWA PRINCIPAL */
+        .chiikawa-img {
+            width: 220px;
             margin: 0 auto 20px;
-            animation: float 3s ease-in-out infinite;
-            border-radius: 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
             cursor: pointer;
+            transition: 0.3s;
+            animation: floatChiikawa 3s ease-in-out infinite;
+            border: 3px solid #ffe4e1;
         }
 
-        @keyframes float {
+        @keyframes floatChiikawa {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-25px); }
         }
 
-        .chiikawa-main:hover {
+        .chiikawa-img:hover {
+            transform: scale(1.12) rotate(-5deg);
             animation: none;
-            transform: scale(1.15) rotate(5deg);
-            transition: transform 0.3s;
         }
 
         h1 {
             color: #ff4d94;
-            margin-bottom: 10px;
-            font-size: 2.5em;
+            font-size: 2.8em;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(255, 77, 148, 0.1);
         }
 
         .subtitle {
             color: #ff99cc;
-            font-size: 1.1em;
+            font-size: 1.15em;
             margin-bottom: 20px;
             font-weight: 500;
         }
 
+        /* CONTADOR DE DÍAS */
         .contador-dias {
-            background: linear-gradient(135deg, #ff4d94, #ffb3d9);
+            background: linear-gradient(135deg, #ff4d94 0%, #ffb3d9 100%);
             color: white;
             padding: 25px;
             border-radius: 20px;
             margin: 25px 0;
-            font-size: 1em;
-            box-shadow: 0 10px 25px rgba(255, 77, 148, 0.3);
+            font-size: 1.05em;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(255, 77, 148, 0.35);
             position: relative;
             overflow: hidden;
         }
 
-        .contador-dias strong {
-            display: block;
-            font-size: 2.5em;
-            margin: 10px 0;
-            position: relative;
-            z-index: 1;
+        .contador-dias::before {
+            content: '✨';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            font-size: 80px;
+            opacity: 0.1;
         }
 
+        .contador-dias strong {
+            display: block;
+            font-size: 3em;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        /* SPOTIFY */
         .spotify-section {
             margin: 20px 0;
             padding: 15px;
             background: linear-gradient(135deg, #f0f7ff 0%, #ffe4f0 100%);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 2px solid #1DB954;
         }
 
         .spotify-section h3 {
             color: #1DB954;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            margin-bottom: 12px;
+            font-size: 1.15em;
         }
 
         .spotify-container {
@@ -124,19 +134,23 @@
             margin-bottom: 10px;
         }
 
+        .spotify-input-group {
+            display: flex;
+            gap: 8px;
+        }
+
         #playlistIdInput {
-            width: calc(100% - 90px);
+            flex: 1;
             padding: 10px;
             border: 2px solid #1DB954;
             border-radius: 8px;
             font-size: 0.9em;
-            margin-right: 5px;
         }
 
         .spotify-section button {
             background: #1DB954;
             color: white;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -149,18 +163,19 @@
             transform: scale(1.05);
         }
 
+        /* VALES */
         .vales-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .vale {
             background: linear-gradient(135deg, #fff5f9 0%, #ffe4f0 100%);
-            padding: 15px;
-            border-radius: 18px;
-            font-size: 0.9em;
+            padding: 14px 10px;
+            border-radius: 16px;
+            font-size: 0.92em;
             border: 2px dashed #ffb3d9;
             cursor: pointer;
             transition: 0.3s;
@@ -172,9 +187,9 @@
         }
 
         .vale:hover {
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-8px) scale(1.06);
             background: linear-gradient(135deg, #ffdeeb 0%, #ffc0d9 100%);
-            box-shadow: 0 8px 20px rgba(255, 77, 148, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 77, 148, 0.3);
         }
 
         .vale.active {
@@ -185,49 +200,52 @@
         }
 
         .vales-contador {
-            font-size: 1em;
+            font-size: 1.05em;
             color: #ff4d94;
             margin-bottom: 15px;
             font-weight: bold;
         }
 
+        /* RAZONES */
         .razones-section {
-            margin: 30px 0;
-            padding: 25px;
+            margin: 25px 0;
+            padding: 22px;
             background: linear-gradient(135deg, #fff5f9 0%, #ffe4f0 100%);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 2px solid #ffdeeb;
         }
 
         .razones-section h3 {
             color: #ff4d94;
             margin-bottom: 15px;
-            font-size: 1.2em;
+            font-size: 1.25em;
         }
 
         .razon {
             background: white;
             padding: 12px;
-            margin: 10px 0;
+            margin: 8px 0;
             border-radius: 12px;
             border-left: 5px solid #ff4d94;
             text-align: left;
             font-size: 0.95em;
             color: #555;
-            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.2);
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.15);
             transition: 0.3s;
         }
 
         .razon:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(255, 77, 148, 0.3);
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.25);
+            background: #fff5f9;
         }
 
+        /* GALERÍA */
         .galeria-section {
             margin: 25px 0;
             padding: 20px;
             background: linear-gradient(135deg, #fff5f9 0%, #ffe4f0 100%);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 2px solid #ffdeeb;
         }
 
@@ -241,66 +259,64 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-bottom: 15px;
         }
 
         .galeria-item {
             width: 100%;
-            height: 140px;
+            height: 130px;
             background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-            border-radius: 15px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border: 2px solid #ffdeeb;
             transition: 0.3s;
-            font-size: 3em;
+            font-size: 3.5em;
             box-shadow: 0 4px 12px rgba(255, 182, 193, 0.2);
         }
 
         .galeria-item:hover {
-            transform: scale(1.08);
+            transform: scale(1.1);
             border-color: #ff4d94;
             box-shadow: 0 8px 20px rgba(255, 77, 148, 0.3);
         }
 
+        /* PREGUNTA Y BOTONES */
         .pregunta {
             font-weight: bold;
-            margin-bottom: 20px;
+            margin: 20px 0 15px 0;
             color: #555;
-            font-size: 1.3em;
+            font-size: 1.4em;
         }
 
         .btns {
             display: flex;
             justify-content: center;
-            gap: 60px;
-            height: 60px;
+            gap: 70px;
             align-items: center;
-            position: relative;
             margin-bottom: 25px;
         }
 
         button {
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 13px 35px;
+            border-radius: 28px;
             border: none;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.05em;
             transition: 0.2s;
         }
 
         .btn-si {
             background: linear-gradient(135deg, #ff4d94, #ff2d7a);
             color: white;
-            box-shadow: 0 8px 15px rgba(255, 77, 148, 0.4);
+            box-shadow: 0 8px 18px rgba(255, 77, 148, 0.4);
         }
 
         .btn-si:hover {
-            transform: scale(1.08);
-            box-shadow: 0 12px 25px rgba(255, 77, 148, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 12px 28px rgba(255, 77, 148, 0.6);
         }
 
         .btn-si:active {
@@ -311,13 +327,13 @@
             background: #ffb3d9;
             color: white;
             box-shadow: 0 4px #e699c2;
-            transition: 0.1s;
         }
 
         #no-btn:hover {
             background: #ff99cc;
         }
 
+        /* BOTONES DE ACCIÓN */
         .action-btns {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -333,7 +349,7 @@
             border: 2px solid #ff4d94;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 0.95em;
             transition: 0.3s;
             box-shadow: 0 4px 12px rgba(255, 182, 193, 0.2);
         }
@@ -341,10 +357,11 @@
         .btn-action:hover {
             background: linear-gradient(135deg, #ff4d94, #ff2d7a);
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(255, 77, 148, 0.4);
         }
 
+        /* NOTIFICACIONES */
         .floating-message {
             position: fixed;
             bottom: 30px;
@@ -353,15 +370,16 @@
             color: white;
             padding: 18px 25px;
             border-radius: 30px;
-            box-shadow: 0 12px 25px rgba(255, 77, 148, 0.4);
+            box-shadow: 0 12px 30px rgba(255, 77, 148, 0.4);
             animation: slideUp 0.5s ease-out;
             z-index: 999;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.98em;
         }
 
         @keyframes slideUp {
             from {
-                transform: translateY(100px);
+                transform: translateY(120px);
                 opacity: 0;
             }
             to {
@@ -370,6 +388,7 @@
             }
         }
 
+        /* TEMA OSCURO */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -381,21 +400,21 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
-            font-size: 1.5em;
-            box-shadow: 0 8px 15px rgba(255, 77, 148, 0.4);
+            font-size: 1.6em;
+            box-shadow: 0 8px 20px rgba(255, 77, 148, 0.4);
             transition: 0.3s;
             z-index: 100;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.15) rotate(20deg);
+            transform: scale(1.15) rotate(25deg);
         }
 
         body.dark-mode {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
         }
 
-        body.dark-mode .card {
+        body.dark-mode .container {
             background: #2d2d2d;
             border-color: #ff4d94;
             color: #fff;
@@ -407,11 +426,12 @@
             color: #ffb3d9;
         }
 
+        /* ANIMACIONES FLOTANTES */
         .heart-float {
             position: fixed;
             pointer-events: none;
-            font-size: 2em;
-            animation: floatUp 3s ease-out forwards;
+            font-size: 2.2em;
+            animation: floatUp 3.5s ease-out forwards;
             z-index: 1001;
         }
 
@@ -421,7 +441,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100px) translateX(50px);
+                transform: translateY(-120px) translateX(60px);
                 opacity: 0;
             }
         }
@@ -429,8 +449,8 @@
         .chiikawa-float {
             position: fixed;
             pointer-events: none;
-            font-size: 3em;
-            animation: chiikawa-float 4s ease-in-out forwards;
+            font-size: 3.5em;
+            animation: chiikawa-float 4.5s ease-in-out forwards;
             z-index: 1001;
         }
 
@@ -439,12 +459,17 @@
                 transform: translateY(0) translateX(0) rotate(0deg);
                 opacity: 1;
             }
+            50% {
+                transform: translateY(-60px) translateX(30px) rotate(10deg);
+                opacity: 1;
+            }
             100% {
-                transform: translateY(-150px) translateX(100px) rotate(20deg);
+                transform: translateY(-160px) translateX(100px) rotate(25deg);
                 opacity: 0;
             }
         }
 
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -464,11 +489,11 @@
 
         .modal-content {
             background: linear-gradient(135deg, white 0%, #fff5f9 100%);
-            margin: 10% auto;
-            padding: 30px;
+            margin: 8% auto;
+            padding: 35px;
             border-radius: 25px;
             width: 90%;
-            max-width: 450px;
+            max-width: 480px;
             box-shadow: 0 20px 60px rgba(255, 182, 193, 0.4);
             border: 3px solid #ffdeeb;
             text-align: center;
@@ -478,7 +503,7 @@
         @keyframes slideInModal {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.7);
             }
             to {
                 opacity: 1;
@@ -489,7 +514,7 @@
         .close-modal {
             color: #ff4d94;
             float: right;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
@@ -497,10 +522,14 @@
 
         .close-modal:hover {
             color: #ff2d7a;
-            transform: scale(1.2);
+            transform: scale(1.25);
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
             .btns {
                 gap: 40px;
             }
@@ -520,9 +549,13 @@
             .theme-toggle {
                 width: 40px;
                 height: 40px;
-                font-size: 1.2em;
-                top: 15px;
-                right: 15px;
+                font-size: 1.3em;
+            }
+
+            .floating-message {
+                bottom: 20px;
+                right: 20px;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -532,83 +565,92 @@
     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
     <div class="container">
-        <div class="card">
-            <img src="https://media.tenor.com/6_-dQsQNfW8AAAAd/chiikawa-cute.gif" class="chiikawa-main" onclick="randomQuote()" title="¡Haz clic para una sorpresa!">
-            
-            <h1>¡Hola, mi amor! 💕</h1>
-            <p class="subtitle">Te amo a distancia pero con todo mi corazón 🌍</p>
+        <!-- CHIIKAWA PRINCIPAL -->
+        <img src="https://media.tenor.com/6_-dQsQNfW8AAAAd/chiikawa-cute.gif" class="chiikawa-img" onclick="randomQuote()" title="¡Chiikawa también te ama!">
+        
+        <h1>¡Hola, mi amor! 💕</h1>
+        <p class="subtitle">Te amo a distancia pero con todo mi corazón 🌍</p>
 
-            <div class="contador-dias">
-                <span>Llevas siendo mi persona favorita</span>
-                <strong id="dias-count">0</strong>
-                <span>días ❤️</span>
+        <!-- CONTADOR DE DÍAS -->
+        <div class="contador-dias">
+            <span>Llevas siendo mi persona favorita</span>
+            <strong id="dias-count">0</strong>
+            <span>días ❤️</span>
+        </div>
+
+        <!-- SPOTIFY -->
+        <div class="spotify-section">
+            <h3>🎵 Nuestra música especial 🎵</h3>
+            <div class="spotify-container">
+                <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2piJKuRdKIA" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
-
-            <div class="spotify-section">
-                <h3>🎵 Nuestra música 🎵</h3>
-                <div class="spotify-container">
-                    <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2piJKuRdKIA" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-                <p style="font-size:0.8em; color:#666; margin-bottom:8px;">¿Quieres cambiar la playlist? Pega el ID aquí:</p>
-                <input id="playlistIdInput" placeholder="ID de la playlist" onkeydown="if(event.key==='Enter'){cambiarPlaylist()}">
-                <button onclick="cambiarPlaylist()">Cambiar 🎵</button>
+            <p style="font-size:0.8em; color:#666; margin-top:10px;">¿Quieres cambiar la playlist? Pega el ID aquí:</p>
+            <div class="spotify-input-group">
+                <input id="playlistIdInput" placeholder="Pega el ID de la playlist" onkeydown="if(event.key==='Enter'){cambiarPlaylist()}">
+                <button onclick="cambiarPlaylist()">Cambiar</button>
             </div>
+        </div>
 
-            <p style="font-size: 0.9em; color: #888;">✨ ¡Haz clic en los vales virtuales! ✨</p>
-            
-            <div class="vales-container">
-                <div class="vale" onclick="toggleVale(this)">💬 Videollamada sorpresa</div>
-                <div class="vale" onclick="toggleVale(this)">🎬 Ver peli juntos</div>
-                <div class="vale" onclick="toggleVale(this)">🎮 Jugar online</div>
-                <div class="vale" onclick="toggleVale(this)">💌 Carta de amor</div>
-                <div class="vale" onclick="toggleVale(this)">🎵 Playlist especial</div>
-                <div class="vale" onclick="toggleVale(this)">📱 Envío sorpresa</div>
-                <div class="vale" onclick="toggleVale(this)">🧸 Sorpresa tierna</div>
-                <div class="vale" onclick="toggleVale(this)">🚗 Paseo virtual</div>
-                <div class="vale" onclick="toggleVale(this)">👫 Día especial</div>
-                <div class="vale" onclick="toggleVale(this)">💝 Regalo sorpresa</div>
+        <p style="font-size: 0.95em; color: #888; margin: 15px 0;">✨ ¡Haz clic en los vales virtuales! ✨</p>
+        
+        <!-- VALES VIRTUALES -->
+        <div class="vales-container">
+            <div class="vale" onclick="toggleVale(this)">💬 Videollamada sorpresa</div>
+            <div class="vale" onclick="toggleVale(this)">🎬 Ver peli juntos</div>
+            <div class="vale" onclick="toggleVale(this)">🎮 Jugar online</div>
+            <div class="vale" onclick="toggleVale(this)">💌 Carta de amor</div>
+            <div class="vale" onclick="toggleVale(this)">🎵 Playlist especial</div>
+            <div class="vale" onclick="toggleVale(this)">📱 Envío sorpresa</div>
+            <div class="vale" onclick="toggleVale(this)">🧸 Sorpresa tierna</div>
+            <div class="vale" onclick="toggleVale(this)">🚗 Paseo virtual</div>
+            <div class="vale" onclick="toggleVale(this)">👫 Día especial</div>
+            <div class="vale" onclick="toggleVale(this)">💝 Regalo sorpresa</div>
+        </div>
+
+        <div class="vales-contador">Vales canjeados: <span id="vales-count">0</span>/10</div>
+
+        <!-- RAZONES POR LAS QUE TE AMO -->
+        <div class="razones-section">
+            <h3>Razones por las que te amo 💗</h3>
+            <div class="razon">❤️ Porque incluso a distancia, te siento cerca</div>
+            <div class="razon">❤️ Por tu risa a través de la pantalla</div>
+            <div class="razon">❤️ Porque eres mi persona favorita en todo el mundo</div>
+            <div class="razon">❤️ Por los mensajes que iluminan mi día</div>
+            <div class="razon">❤️ Porque la distancia no importa cuando se ama de verdad</div>
+            <div class="razon">❤️ Por tu paciencia y comprensión infinita</div>
+            <div class="razon">❤️ Porque te pienso cada segundo del día</div>
+            <div class="razon">❤️ Por creer en nosotros sin dudar nunca</div>
+            <div class="razon">❤️ Porque eres mi todo, mi todo, mi todo 💕</div>
+        </div>
+
+        <!-- GALERÍA DE MOMENTOS -->
+        <div class="galeria-section">
+            <h3>Momentos especiales 📸</h3>
+            <div class="galeria">
+                <div class="galeria-item" onclick="openModal('Primera videollamada 📱')">📱</div>
+                <div class="galeria-item" onclick="openModal('Nuestras risas 😂')">😂</div>
+                <div class="galeria-item" onclick="openModal('Te extraño 💔')">💔</div>
+                <div class="galeria-item" onclick="openModal('Te amo profundamente 💕')">💕</div>
             </div>
+        </div>
 
-            <div class="vales-contador">Vales canjeados: <span id="vales-count">0</span>/10</div>
+        <p class="pregunta">¿Seguimos juntos en esta aventura? 🥺✈️</p>
 
-            <div class="razones-section">
-                <h3>Razones por las que te amo 💗</h3>
-                <div class="razon">❤️ Porque incluso a distancia, te siento cerca</div>
-                <div class="razon">❤️ Por tu risa a través de la pantalla</div>
-                <div class="razon">❤️ Porque eres mi persona favorita en todo el mundo</div>
-                <div class="razon">❤️ Por los mensajes que iluminan mi día</div>
-                <div class="razon">❤️ Porque la distancia no importa cuando se ama de verdad</div>
-                <div class="razon">❤️ Por tu paciencia y comprensión</div>
-                <div class="razon">❤️ Porque te pienso cada segundo del día</div>
-                <div class="razon">❤️ Por creer en nosotros sin dudar</div>
-                <div class="razon">❤️ Porque eres mi todo, mi todo, mi todo 💕</div>
-            </div>
+        <!-- BOTONES PRINCIPALES -->
+        <div class="btns">
+            <button class="btn-si" onclick="celebrar()">¡SIEMPRE! 💍</button>
+            <button id="no-btn" onmouseover="escapar()">No</button>
+        </div>
 
-            <div class="galeria-section">
-                <h3>Momentos especiales 📸</h3>
-                <div class="galeria">
-                    <div class="galeria-item" onclick="openModal('Primera videollamada 📱')">📱</div>
-                    <div class="galeria-item" onclick="openModal('Nuestras risas 😂')">😂</div>
-                    <div class="galeria-item" onclick="openModal('Te extraño mucho 💔')">💔</div>
-                    <div class="galeria-item" onclick="openModal('Te amo profundamente 💕')">💕</div>
-                </div>
-            </div>
-
-            <p class="pregunta">¿Seguimos juntos en este viaje? 🥺✈️</p>
-
-            <div class="btns">
-                <button class="btn-si" onclick="celebrar()">¡SIEMPRE! 💍</button>
-                <button id="no-btn" onmouseover="escapar()">No</button>
-            </div>
-
-            <div class="action-btns">
-                <button class="btn-action" onclick="mostrarMensaje()">💌 Mensaje</button>
-                <button class="btn-action" onclick="lloviaDeCorazones()">💕 Lluvia</button>
-                <button class="btn-action" onclick="resetearVales()">🔄 Reset</button>
-            </div>
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="action-btns">
+            <button class="btn-action" onclick="mostrarMensaje()">💌 Mensaje</button>
+            <button class="btn-action" onclick="lloviaChiikawa()">🤍 Lluvia</button>
+            <button class="btn-action" onclick="resetearVales()">🔄 Reset</button>
         </div>
     </div>
 
+    <!-- MODAL -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -619,6 +661,7 @@
     </div>
 
     <script>
+        // Contador de días
         function calcularDias() {
             const fechaInicio = new Date('2026-03-28');
             const hoy = new Date();
@@ -627,6 +670,7 @@
             document.getElementById('dias-count').textContent = dias >= 0 ? dias : 0;
         }
 
+        // Cambiar playlist
         function cambiarPlaylist() {
             const id = document.getElementById('playlistIdInput').value.trim();
             if (id) {
@@ -638,17 +682,20 @@
             }
         }
 
+        // Actualizar contador de vales
         function actualizarContadorVales() {
             const valesActivos = document.querySelectorAll('.vale.active').length;
             document.getElementById('vales-count').textContent = valesActivos;
         }
 
+        // Toggle vale
         function toggleVale(element) {
             element.classList.toggle('active');
             actualizarContadorVales();
-            crearCorazonFlotante(event);
+            crearChiikawaFlotante(event);
         }
 
+        // Escapar botón No
         function escapar() {
             const btn = document.getElementById('no-btn');
             const x = Math.random() * (window.innerWidth - btn.clientWidth);
@@ -659,20 +706,21 @@
             btn.style.zIndex = "1000";
         }
 
+        // Celebrar
         function celebrar() {
             var duration = 5 * 1000;
             var end = Date.now() + duration;
 
             (function frame() {
               confetti({
-                particleCount: 3,
+                particleCount: 4,
                 angle: 60,
                 spread: 55,
                 origin: { x: 0 },
                 colors: ['#ff4d94', '#ffb3d9']
               });
               confetti({
-                particleCount: 3,
+                particleCount: 4,
                 angle: 120,
                 spread: 55,
                 origin: { x: 1 },
@@ -685,17 +733,38 @@
             }());
 
             alert("¡Te amo mi amor! ❤️ La distancia no importa cuando se ama así. Siempre contigo 💕");
-            lloviaDeCorazones();
+            lloviaChiikawa();
         }
 
-        function lloviaDeCorazones() {
-            for (let i = 0; i < 25; i++) {
+        // Lluvia de Chiikawa
+        function lloviaChiikawa() {
+            for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
-                    crearCorazonFlotante();
+                    crearChiikawaFlotante();
                 }, i * 100);
             }
         }
 
+        // Crear Chiikawa flotante
+        function crearChiikawaFlotante(e) {
+            const chiis = ['🤍', '✨', '🥺', '💕', '🎀', '💫', '🌸'];
+            const chiikawa = document.createElement('div');
+            chiikawa.className = 'chiikawa-float';
+            chiikawa.textContent = chiis[Math.floor(Math.random() * chiis.length)];
+            
+            if (e) {
+                chiikawa.style.left = e.clientX + 'px';
+                chiikawa.style.top = e.clientY + 'px';
+            } else {
+                chiikawa.style.left = Math.random() * window.innerWidth + 'px';
+                chiikawa.style.top = Math.random() * window.innerHeight + 'px';
+            }
+            
+            document.body.appendChild(chiikawa);
+            setTimeout(() => chiikawa.remove(), 4500);
+        }
+
+        // Crear corazón
         function crearCorazonFlotante(e) {
             const corazon = document.createElement('div');
             corazon.className = 'heart-float';
@@ -710,31 +779,14 @@
             }
             
             document.body.appendChild(corazon);
-            setTimeout(() => corazon.remove(), 3000);
+            setTimeout(() => corazon.remove(), 3500);
         }
 
-        function crearChiikawaFlotante(e) {
-            const chiis = ['🤍', '✨', '🥺', '💕', '🎀'];
-            const chiikawa = document.createElement('div');
-            chiikawa.className = 'chiikawa-float';
-            chiikawa.textContent = chiis[Math.floor(Math.random() * chiis.length)];
-            
-            if (e) {
-                chiikawa.style.left = e.clientX + 'px';
-                chiikawa.style.top = e.clientY + 'px';
-            } else {
-                chiikawa.style.left = Math.random() * window.innerWidth + 'px';
-                chiikawa.style.top = Math.random() * window.innerHeight + 'px';
-            }
-            
-            document.body.appendChild(chiikawa);
-            setTimeout(() => chiikawa.remove(), 4000);
-        }
-
+        // Modal
         function openModal(titulo) {
             const modal = document.getElementById('myModal');
             document.getElementById('modalTitle').textContent = titulo;
-            document.getElementById('modalContent').textContent = '¡Este es un momento especial nuestro, incluso a distancia! 💕';
+            document.getElementById('modalContent').textContent = '¡Este es un momento especial nuestro! 💕';
             modal.style.display = 'block';
         }
 
@@ -749,6 +801,7 @@
             }
         }
 
+        // Mensajes
         function mostrarMensaje() {
             const mensajes = [
                 '¡Te amo mucho mi amor! 💕',
@@ -772,6 +825,7 @@
             setTimeout(() => notif.remove(), 3000);
         }
 
+        // Tema oscuro
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const btn = document.querySelector('.theme-toggle');
@@ -784,6 +838,7 @@
             document.querySelector('.theme-toggle').textContent = '☀️';
         }
 
+        // Quote aleatorio
         function randomQuote() {
             const quotes = [
                 '¡Te amo! 💕',
@@ -796,12 +851,14 @@
             crearChiikawaFlotante();
         }
 
+        // Reset vales
         function resetearVales() {
             document.querySelectorAll('.vale.active').forEach(v => v.classList.remove('active'));
             actualizarContadorVales();
             mostrarNotificacion('¡Vales reseteados! 🔄');
         }
 
+        // Inicializar
         calcularDias();
         actualizarContadorVales();
     </script>
