@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi personita favorita 🎀</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 95%;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            border: 3px solid #ffdeeb;
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chiikawa-img {
+            width: 180px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .chiikawa-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        h1 {
+            color: #ff4d94;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        /* Spotify Container */
+        .spotify-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            border: 2px solid #1DB954;
+        }
+
+        .spotify-section h3 {
+            color: #1DB954;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .spotify-container {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 10px;
+        }
+
+        #playlistIdInput {
+            width: calc(100% - 80px);
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .spotify-section button {
+            background: #1DB954;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .spotify-section button:hover {
+            background: #1ed760;
+        }
+
+        /* Vales Container */
+        .vales-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .vale {
+            background: #fff;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            border: 2px dashed #ffb3d9;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .vale:hover {
+            transform: scale(1.05);
+            background: #fff5f9;
+        }
+
+        .vale.active {
+            background: #ffeef5;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        /* Contador de vales */
+        .vales-contador {
+            font-size: 0.9em;
+            color: #ff4d94;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .pregunta {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            height: 60px;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            transition: 0.2s;
+        }
+
+        .btn-si {
+            background: #ff4d94;
+            color: white;
+            box-shadow: 0 4px #c2185b;
+        }
+
+        .btn-si:hover {
+            background: #ff2d7a;
+            transform: scale(1.05);
+        }
+
+        .btn-si:active {
+            transform: scale(0.95);
+        }
+
+        #no-btn {
+            background: #ffb3d9;
+            color: white;
+            box-shadow: 0 4px #e699c2;
+            transition: 0.1s;
+        }
+
+        #no-btn:hover {
+            background: #ff99cc;
+        }
+
+        /* Galería de fotos */
+        .galeria-section {
+            margin: 25px 0;
+            padding-top: 20px;
+            border-top: 2px solid #ffdeeb;
+        }
+
+        .galeria-section h3 {
+            color: #ff4d94;
+            margin-bottom: 15px;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .galeria-item {
+            width: 100%;
+            height: 120px;
+            background: #fff0f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid #ffdeeb;
+            transition: 0.3s;
+            font-size: 2.5em;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.05);
+            border-color: #ff4d94;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            text-align: center;
+        }
+
+        .close-modal {
+            color: #ff4d94;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #ff2d7a;
+        }
+
+        /* Contador de días */
+        .contador-dias {
+            background: linear-gradient(135deg, #ff4d94, #ffb3d9);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .contador-dias strong {
+            display: block;
+            font-size: 1.8em;
+            margin: 10px 0;
+        }
+
+        /* Razones por las que te amo */
+        .razones-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #fff5f9;
+            border-radius: 15px;
+            border: 2px solid #ffdeeb;
+        }
+
+        .razones-section h3 {
+            color: #ff4d94;
+            margin-bottom: 10px;
+        }
+
+        .razon {
+            background: white;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border-left: 4px solid #ff4d94;
+            text-align: left;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Botones de acción */
+        .action-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-action {
+            background: #ffe4f0;
+            color: #ff4d94;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #ff4d94;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: 0.3s;
+        }
+
+        .btn-action:hover {
+            background: #ff4d94;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Mensaje flotante */
+        .floating-message {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ff4d94;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 8px 16px rgba(255, 77, 148, 0.3);
+            animation: slideUp 0.5s ease-out;
+            z-index: 999;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Tema oscuro toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4d94;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 12px rgba(255, 77, 148, 0.3);
+            transition: 0.3s;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
+        }
+
+        body.dark-mode .card {
+            background: #2d2d2d;
+            border-color: #ff4d94;
+            color: #fff;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h3,
+        body.dark-mode .pregunta {
+            color: #ffb3d9;
+        }
+
+        body.dark-mode .vale,
+        body.dark-mode .razon {
+            background: #3a3a3a;
+            color: #fff;
+        }
+
+        body.dark-mode .razones-section {
+            background: #3a2a3a;
+        }
+
+        /* Celebración de corazones */
+        .heart-float {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2em;
+            animation: floatUp 3s ease-out forwards;
+            z-index: 1001;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btns {
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .vales-container {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <div class="container">
+        <div class="card">
+            <img src="https://media.tenor.com/E8w2lP3iPBAAAAAC/chiikawa-love.gif" class="chiikawa-img" onclick="randomQuote()">
+            
+            <h1>¡Hola, amor! ✨</h1>
+
+            <!-- Contador de días -->
+            <div class="contador-dias">
+                <span>Llevas siendo mi persona favorita</span>
+                <strong id="dias-count">0</strong>
+                <span>días ❤️</span>
+            </div>
+
+            <!-- Spotify Personalizado -->
+            <div class="spotify-section">
+                <h3>🌿 Tu música especial 🌿</h3>
+                <div class="spotify-container">
+                    <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2piJKuRdKIA" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <p style="font-size:0.8em; color:#666; margin-bottom:8px;">¿Quieres cambiar la playlist? Pega el ID aquí:</p>
+                <input id="playlistIdInput" placeholder="ID de la playlist" onkeydown="if(event.key==='Enter'){cambiarPlaylist()}">
+                <button onclick="cambiarPlaylist()">Cambiar 🎵</button>
+            </div>
+
+            <p style="font-size: 0.9em; color: #888;">¡Haz clic en tus regalos!</p>
+            
+            <div class="vales-container">
+                <div class="vale" onclick="toggleVale(this)">���� Vale por helado juntos</div>
+                <div class="vale" onclick="toggleVale(this)">🤗 Vale x 3 abrazos</div>
+                <div class="vale" onclick="toggleVale(this)">🎬 Maratón de series</div>
+                <div class="vale" onclick="toggleVale(this)">💋 Besos infinitos</div>
+                <div class="vale" onclick="toggleVale(this)">🎮 Retas gamers</div>
+                <div class="vale" onclick="toggleVale(this)">🍕 Pizza & risas</div>
+                <div class="vale" onclick="toggleVale(this)">🧸 Sorpresa tierna</div>
+                <div class="vale" onclick="toggleVale(this)">🚗 Paseo a cualquier lado</div>
+                <div class="vale" onclick="toggleVale(this)">👩‍❤️‍💋‍👨 Día solo tú y yo</div>
+                <div class="vale" onclick="toggleVale(this)">💌 Carta especial</div>
+            </div>
+
+            <div class="vales-contador">Vales canjeados: <span id="vales-count">0</span>/10</div>
+
+            <!-- Razones por las que te amo -->
+            <div class="razones-section">
+                <h3>Razones por las que te amo 💗</h3>
+                <div class="razon">❤️ Porque tu sonrisa ilumina mis días grises</div>
+                <div class="razon">❤️ Por lo detallista y especial que eres conmigo</div>
+                <div class="razon">❤️ Porque eres mi mejor amiga y cómplice</div>
+                <div class="razon">❤️ Por tus "te amo" inesperados que me enamoran</div>
+                <div class="razon">❤️ Porque cada día contigo es mejor que el anterior</div>
+                <div class="razon">❤️ Por la forma en que me miras</div>
+                <div class="razon">❤️ Por creer en nosotros pase lo que pase</div>
+                <div class="razon">❤️ Porque contigo, todo tiene sentido</div>
+                <div class="razon">❤️ Por ser exactamente como eres, sin cambios</div>
+            </div>
+
+            <!-- Galería de emojis -->
+            <div class="galeria-section">
+                <h3>Momentos especiales 📸</h3>
+                <div class="galeria">
+                    <div class="galeria-item" onclick="openModal('Nuestro primer beso 💋')">💋</div>
+                    <div class="galeria-item" onclick="openModal('Nuestras carcajadas 😂')">😂</div>
+                    <div class="galeria-item" onclick="openModal('Noche de estrellas ✨')">✨</div>
+                    <div class="galeria-item" onclick="openModal('Abrazo más bonito 🤗')">🤗</div>
+                </div>
+            </div>
+
+            <p class="pregunta">¿Quieres jugar conmigo? 🥺🎮</p>
+
+            <div class="btns">
+                <button class="btn-si" onclick="celebrar()">¡SÍ!</button>
+                <button id="no-btn" onmouseover="escapar()">No</button>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="action-btns">
+                <button class="btn-action" onclick="mostrarMensaje()">💌 Mensaje</button>
+                <button class="btn-action" onclick="lloviaDeCorazones()">💕 Lluvia</button>
+                <button class="btn-action" onclick="resetearVales()">🔄 Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <p id="modalContent">Contenido</p>
+            <p style="font-size: 3em; margin-top: 20px;" id="modalEmoji">❤️</p>
+        </div>
+    </div>
+
+    <script>
+        // Contador de días - ACTUALIZADO AL 28/03/2026
+        function calcularDias() {
+            const fechaInicio = new Date('2026-03-28');
+            const hoy = new Date();
+            const diferencia = hoy - fechaInicio;
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            document.getElementById('dias-count').textContent = dias >= 0 ? dias : 0;
+        }
+
+        // Cambiar playlist de Spotify
+        function cambiarPlaylist() {
+            const id = document.getElementById('playlistIdInput').value.trim();
+            if (id) {
+                document.getElementById('spotify-iframe').src = 'https://open.spotify.com/embed/playlist/' + id;
+                mostrarNotificacion('¡Playlist cambiada! 🎵');
+                document.getElementById('playlistIdInput').value = '';
+            } else {
+                mostrarNotificacion('¡Pega el ID de la playlist!');
+            }
+        }
+
+        // Contador de vales canjeados
+        function actualizarContadorVales() {
+            const valesActivos = document.querySelectorAll('.vale.active').length;
+            document.getElementById('vales-count').textContent = valesActivos;
+        }
+
+        function toggleVale(element) {
+            element.classList.toggle('active');
+            actualizarContadorVales();
+            crearCorazonFlotante(event);
+        }
+
+        // Escapar del botón "No"
+        function escapar() {
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - btn.clientWidth);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.zIndex = "1000";
+        }
+
+        // Celebración principal
+        function celebrar() {
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+              confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff4d94', '#ffb3d9']
+              });
+              confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff4d94', '#ffb3d9']
+              });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
+
+            alert("¡Yattaaa! ❤️ ¡Sabía que dirías que sí! Te quiero mucho.");
+            lloviaDeCorazones();
+        }
+
+        // Lluvia de corazones
+        function lloviaDeCorazones() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    crearCorazonFlotante();
+                }, i * 100);
+            }
+        }
+
+        // Crear corazón flotante
+        function crearCorazonFlotante(e) {
+            const corazon = document.createElement('div');
+            corazon.className = 'heart-float';
+            corazon.textContent = '❤️';
+            
+            if (e) {
+                corazon.style.left = e.clientX + 'px';
+                corazon.style.top = e.clientY + 'px';
+            } else {
+                corazon.style.left = Math.random() * window.innerWidth + 'px';
+                corazon.style.top = Math.random() * window.innerHeight + 'px';
+            }
+            
+            document.body.appendChild(corazon);
+            setTimeout(() => corazon.remove(), 3000);
+        }
+
+        // Modal
+        function openModal(titulo) {
+            const modal = document.getElementById('myModal');
+            document.getElementById('modalTitle').textContent = titulo;
+            document.getElementById('modalContent').textContent = '¡Este es un momento especial nuestro! 💕';
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Mostrar mensaje
+        function mostrarMensaje() {
+            const mensajes = [
+                '¡Te amo mucho! 💕',
+                '¡Eres lo mejor que me pasó! 🌟',
+                '¡Quiero estar siempre contigo! 👫',
+                '¡Eres hermosa/o! 😍',
+                '¡Gracias por existir en mi vida! 💖',
+                '¡Eres quien quiero para siempre! ✨',
+                '¡Hoy y siempre, contigo! 💞',
+                '"Contigo, todo es mejor." 🌹'
+            ];
+            const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+            mostrarNotificacion(mensaje);
+        }
+
+        // Notificación flotante
+        function mostrarNotificacion(texto) {
+            const notif = document.createElement('div');
+            notif.className = 'floating-message';
+            notif.textContent = texto;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        // Toggle tema oscuro
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // Cargar preferencia de tema
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+
+        // Quote aleatorio
+        function randomQuote() {
+            const quotes = [
+                '¡Te amo! 💕',
+                '¡Eres increíble! 🌟',
+                '¡Mi favorita! 🎀',
+                '¡Siempre contigo! 👫',
+                '¡Eres lo máximo! 🔥',
+                '¡Nunca dudes de mí! 💗'
+            ];
+            mostrarNotificacion(quotes[Math.floor(Math.random() * quotes.length)]);
+        }
+
+        // Reset de vales
+        function resetearVales() {
+            document.querySelectorAll('.vale.active').forEach(v => v.classList.remove('active'));
+            actualizarContadorVales();
+            mostrarNotificacion('¡Vales reseteados! 🔄');
+        }
+
+        // Inicializar
+        calcularDias();
+        actualizarContadorVales();
+    </script>
+</body>
+</html>
