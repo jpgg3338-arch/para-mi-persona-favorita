@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Camila 💕 | Nuestro Dúo Favorito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff1b6d;
+            --secondary: #b366ff;
+            --accent: #00d4ff;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(15, 15, 25, 0.7);
+            --card-border: rgba(255, 27, 109, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --success: #00ff88;
+            --neon-pink: #ff006e;
+            --neon-blue: #00d9ff;
+            --neon-purple: #b013f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ==================== FONDO ANIMADO PREMIUM ==================== */
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            25%  { background-position: 100% 50%; }
+            50%  { background-position: 100% 0%; }
+            75%  { background-position: 0% 0%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0a0a0f, #1a0a2e, #0d001a, #0a1a2e, #1a0a0f);
+            background-size: 400% 400%;
+            animation: gradientShift 18s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* ==================== MODO OSCURO ==================== */
+        body.dark-mode {
+            background: linear-gradient(-45deg, #000000, #0d0015, #000000, #050010, #000000);
+            background-size: 400% 400%;
+            animation: gradientShift 18s ease infinite;
+        }
+
+        body.dark-mode .card {
+            background: linear-gradient(135deg, rgba(5, 5, 10, 0.95), rgba(15, 0, 30, 0.95));
+        }
+
+        body.dark-mode .games-section,
+        body.dark-mode .shop-section,
+        body.dark-mode .timeline-section,
+        body.dark-mode .polaroid-section,
+        body.dark-mode .frases-section,
+        body.dark-mode .razones-section,
+        body.dark-mode .buzon-section {
+            background: linear-gradient(135deg, rgba(5, 5, 10, 0.9), rgba(15, 0, 30, 0.9));
+        }
+
+        /* ==================== PARTÍCULAS Y FONDO ==================== */
+        .background-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+            pointer-events: none;
+        }
+
+        .particle-dot {
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.8), transparent);
+            box-shadow: 0 0 8px rgba(0, 217, 255, 0.6), 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .particle-heart {
+            font-size: 14px;
+            background: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            filter: drop-shadow(0 0 4px rgba(255, 0, 110, 0.7));
+        }
+
+        .particle-star {
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.8), transparent);
+            box-shadow: 0 0 8px rgba(255, 200, 0, 0.5);
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            5%  { opacity: 0.8; transform: translateY(100vh) translateX(5px) scale(1); }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-10vh) translateX(60px) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Orbs flotantes de fondo */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(176, 19, 240, 0.12);
+            top: -100px;
+            left: -100px;
+            animation-duration: 14s;
+        }
+
+        .bg-orb-2 {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 0, 110, 0.1);
+            bottom: -80px;
+            right: -80px;
+            animation-duration: 17s;
+            animation-delay: -5s;
+        }
+
+        .bg-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 217, 255, 0.08);
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-duration: 20s;
+            animation-delay: -9s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            33%       { transform: translateY(-30px) scale(1.05); }
+            66%       { transform: translateY(20px) scale(0.95); }
+        }
+
+        /* ==================== CONTENEDOR PRINCIPAL ==================== */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 15px;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(12, 12, 22, 0.85), rgba(22, 8, 40, 0.85));
+            border: 1.5px solid rgba(255, 27, 109, 0.35);
+            border-radius: 28px;
+            padding: 40px 30px;
+            backdrop-filter: blur(30px) saturate(1.5);
+            -webkit-backdrop-filter: blur(30px) saturate(1.5);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(255, 27, 109, 0.12),
+                0 0 80px rgba(176, 19, 240, 0.06);
+            animation: slideIn 0.8s ease-out;
+            transition: box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 110, 0.6), rgba(0, 217, 255, 0.6), transparent);
+        }
+
+        .card:hover {
+            box-shadow:
+                0 35px 90px rgba(0, 0, 0, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 60px rgba(255, 27, 109, 0.18),
+                0 0 100px rgba(176, 19, 240, 0.1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== IMAGEN PRINCIPAL ==================== */
+        .hamster-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .hamster-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid var(--neon-pink);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 0 25px rgba(255, 27, 109, 0.6));
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        .hamster-img:hover {
+            transform: scale(1.12) rotate(-5deg);
+            filter: drop-shadow(0 0 45px rgba(255, 27, 109, 0.95));
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 27, 109, 0.4), inset 0 0 20px rgba(255, 27, 109, 0.1); }
+            50%       { box-shadow: 0 0 40px rgba(255, 27, 109, 0.8), inset 0 0 30px rgba(255, 27, 109, 0.3); }
+        }
+
+        /* ==================== TÍTULOS ==================== */
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 25px 0 15px 0;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: var(--neon-blue);
+            margin: 20px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1em;
+            margin-bottom: 25px;
+        }
+
+        /* ==================== SECCIÓN BASE (glassmorphism mejorado) ==================== */
+        .section-glass {
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.7), rgba(25, 10, 45, 0.7));
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-glass::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        }
+
+        /* ==================== SECCIÓN DE TIEMPO ==================== */
+        .contador-section {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(255, 27, 109, 0.08));
+            border: 1.5px solid rgba(0, 217, 255, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .contador-section:hover {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 217, 255, 0.4);
+        }
+
+        .tiempo-grande {
+            font-size: 3em;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .tiempo-real {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            color: var(--neon-blue);
+            margin-top: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        /* ==================== SECCIÓN TE EXTRAÑO ==================== */
+        .extraño-section {
+            background: linear-gradient(135deg, rgba(255, 27, 109, 0.08), rgba(176, 19, 240, 0.08));
+            border: 1.5px solid rgba(255, 27, 109, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 27, 109, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .extraño-section:hover {
+            box-shadow: 0 0 40px rgba(255, 27, 109, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 27, 109, 0.4);
+        }
+
+        .extraño-counter {
+            font-size: 2em;
+            color: var(--neon-pink);
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-extraño {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 27, 109, 0.45), 0 0 0 0 rgba(255, 27, 109, 0.4);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-extraño::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-extraño:hover::before { transform: scale(1); }
+
+        .btn-extraño:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 27, 109, 0.65), 0 0 20px rgba(255, 27, 109, 0.3);
+        }
+
+        .btn-extraño:active { transform: translateY(-1px) scale(0.99); }
+
+        /* ==================== SECCIÓN DE MINIJUEGOS ==================== */
+        .games-section {
+            background: linear-gradient(135deg, rgba(176, 19, 240, 0.08), rgba(0, 217, 255, 0.08));
+            border: 1.5px solid rgba(176, 19, 240, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(176, 19, 240, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .games-section:hover {
+            box-shadow: 0 0 40px rgba(176, 19, 240, 0.14);
+            border-color: rgba(176, 19, 240, 0.4);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .game-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(0, 217, 255, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(176, 19, 240, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-item:hover::before { opacity: 1; }
+
+        .game-item:hover {
+            border-color: rgba(0, 217, 255, 0.5);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 217, 255, 0.2), 0 0 20px rgba(0, 217, 255, 0.1);
+        }
+
+        .game-title {
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 5px;
+            font-size: 0.95em;
+            position: relative;
+        }
+
+        .game-desc {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            position: relative;
+        }
+
+        /* ==================== TIENDA DE RECOMPENSAS ==================== */
+        .shop-section {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.07), rgba(255, 27, 109, 0.07));
+            border: 1.5px solid rgba(0, 255, 136, 0.22);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .shop-section:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.12);
+            border-color: rgba(0, 255, 136, 0.38);
+        }
+
+        .points-display {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(0, 217, 255, 0.12));
+            border: 1.5px solid rgba(0, 255, 136, 0.4);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .points-number {
+            font-size: 2.5em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--success), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .reward-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .reward-item {
+            background: rgba(0, 255, 136, 0.07);
+            border: 1.5px solid rgba(0, 255, 136, 0.25);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reward-item:hover:not(.locked) {
+            background: rgba(0, 255, 136, 0.15);
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.25), 0 0 15px rgba(0, 255, 136, 0.15);
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+
+        .reward-item.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(0.4);
+        }
+
+        .reward-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .reward-price {
+            font-size: 0.85em;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* ==================== SECCIÓN FRASES ==================== */
+        .frases-section {
+            background: linear-gradient(135deg, rgba(255, 27, 109, 0.08), rgba(176, 19, 240, 0.08));
+            border: 1.5px solid rgba(255, 27, 109, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 27, 109, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .frases-section:hover {
+            box-shadow: 0 0 40px rgba(255, 27, 109, 0.14);
+            border-color: rgba(255, 27, 109, 0.4);
+        }
+
+        .frase-contenedor {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 27, 109, 0.25);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frase-texto {
+            font-size: 1.3em;
+            color: var(--neon-pink);
+            font-weight: 700;
+            animation: fadeInFrase 0.6s ease-out;
+            font-style: italic;
+            text-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+        }
+
+        @keyframes fadeInFrase {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-frase {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1em;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(255, 27, 109, 0.35);
+        }
+
+        .btn-frase:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 27, 109, 0.55);
+        }
+
+        /* ==================== SECCIÓN RAZONES ==================== */
+        .razones-section {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.07), rgba(176, 19, 240, 0.07));
+            border: 1.5px solid rgba(0, 217, 255, 0.18);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .razones-section:hover {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.12);
+            border-color: rgba(0, 217, 255, 0.32);
+        }
+
+        .razon-item {
+            background: rgba(0, 217, 255, 0.07);
+            border-left: 3px solid var(--neon-blue);
+            padding: 12px 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .razon-item:hover {
+            background: rgba(0, 217, 255, 0.14);
+            transform: translateX(8px);
+            border-left-color: var(--neon-pink);
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.1);
+        }
+
+        /* ==================== SECCIÓN TIMELINE ==================== */
+        .timeline-section {
+            background: linear-gradient(135deg, rgba(176, 19, 240, 0.08), rgba(0, 217, 255, 0.08));
+            border: 1.5px solid rgba(176, 19, 240, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(176, 19, 240, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .timeline-section:hover {
+            box-shadow: 0 0 40px rgba(176, 19, 240, 0.14);
+            border-color: rgba(176, 19, 240, 0.4);
+        }
+
+        .timeline-text {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        /* ==================== SECCIÓN POLAROID ==================== */
+        .polaroid-section {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.07), rgba(0, 217, 255, 0.07));
+            border: 1.5px solid rgba(0, 255, 136, 0.22);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .polaroid-section:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.12);
+            border-color: rgba(0, 255, 136, 0.38);
+        }
+
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .polaroid {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transform: rotate(-2deg) translateY(0);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .polaroid:nth-child(2) { transform: rotate(1.5deg) translateY(0); }
+        .polaroid:nth-child(3) { transform: rotate(-1deg) translateY(0); }
+        .polaroid:nth-child(4) { transform: rotate(2deg) translateY(0); }
+
+        .polaroid:hover {
+            transform: rotate(0deg) translateY(-12px) scale(1.05) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 27, 109, 0.3);
+            z-index: 10;
+        }
+
+        .polaroid-img {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .polaroid-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .polaroid-text {
+            text-align: center;
+            color: #333;
+            font-size: 0.75em;
+            font-family: 'Marker Felt', cursive, 'Comic Sans MS';
+            font-weight: bold;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==================== SECCIÓN CONTINUAR RELACIÓN ==================== */
+        .continue-section {
+            background: linear-gradient(135deg, rgba(255, 27, 109, 0.12), rgba(176, 19, 240, 0.12));
+            border: 1.5px solid rgba(255, 27, 109, 0.35);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 27, 109, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        .continue-section:hover {
+            box-shadow: 0 0 50px rgba(255, 27, 109, 0.2);
+            border-color: rgba(255, 27, 109, 0.5);
+        }
+
+        .continue-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 50;
+        }
+
+        .btn-continue {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1em;
+        }
+
+        .btn-yes-continue {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 27, 109, 0.45);
+        }
+
+        .btn-yes-continue:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 14px 35px rgba(255, 27, 109, 0.65);
+        }
+
+        .btn-no-continue {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--neon-blue);
+            border: 1.5px solid var(--neon-blue);
+            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.15);
+            position: relative;
+            transition: all 0.15s ease;
+        }
+
+        .btn-no-continue:hover {
+            background: rgba(0, 217, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        /* ==================== SECCIÓN TERMINAR ==================== */
+        .terminar-section {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.08), rgba(176, 19, 240, 0.08));
+            border: 1.5px solid rgba(255, 100, 100, 0.22);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 100, 100, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.35s ease;
+        }
+
+        .btn-terminar {
+            background: linear-gradient(135deg, #ff4d5f, #ff1b6d);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 77, 95, 0.4);
+        }
+
+        .btn-terminar:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 35px rgba(255, 77, 95, 0.65);
+        }
+
+        /* ==================== PANTALLA FINAL ==================== */
+        .final-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+            animation: fadeInScreen 0.5s ease-out;
+        }
+
+        .final-screen.active { display: flex; }
+
+        @keyframes fadeInScreen {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .final-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 0 50px rgba(255, 27, 109, 0.7);
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, rgba(255, 27, 109, 0.15), rgba(176, 19, 240, 0.15));
+            border: 1.5px solid rgba(255, 27, 109, 0.35);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 0.95em;
+            text-align: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+        }
+
+        .final-form {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(255, 27, 109, 0.08));
+            border: 1.5px solid rgba(0, 217, 255, 0.25);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+        }
+
+        .final-form textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        .final-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            background: rgba(0, 217, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .final-form button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .final-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 217, 255, 0.4);
+        }
+
+        .continue-response-section {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+            border: 1.5px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .response-message {
+            color: var(--success);
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* ==================== TEMA TOGGLE ==================== */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 0 25px rgba(255, 27, 109, 0.5), 0 0 50px rgba(255, 27, 109, 0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            border: 2px solid rgba(0, 217, 255, 0.5);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.15) rotate(25deg);
+            box-shadow: 0 0 35px rgba(255, 27, 109, 0.8);
+        }
+
+        /* ==================== COFRE SECRETO ==================== */
+        .secret-chest {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 27, 109, 0.5), 0 0 50px rgba(255, 27, 109, 0.15);
+            z-index: 500;
+            animation: secretPulse 2.5s ease-in-out infinite;
+            border: 2px solid rgba(0, 217, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes secretPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 27, 109, 0.5); }
+            50%       { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 27, 109, 0.8); }
+        }
+
+        .secret-chest:hover {
+            transform: scale(1.18) !important;
+            box-shadow: 0 0 50px rgba(255, 27, 109, 0.9) !important;
+        }
+
+        /* ==================== NOTIFICACIONES ==================== */
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.95), rgba(25, 10, 45, 0.95));
+            border: 1.5px solid rgba(255, 27, 109, 0.5);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-weight: 600;
+            box-shadow: 0 0 25px rgba(255, 27, 109, 0.35), 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideInNotif 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            max-width: 280px;
+            font-size: 0.9em;
+            backdrop-filter: blur(20px);
+        }
+
+        @keyframes slideInNotif {
+            from { transform: translateX(-150px) scale(0.8); opacity: 0; }
+            to   { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        /* ==================== MODAL SWEETALERT ==================== */
+        .swal2-popup {
+            background: linear-gradient(135deg, rgba(12, 12, 22, 0.97), rgba(22, 8, 40, 0.97)) !important;
+            border: 1.5px solid rgba(0, 217, 255, 0.3) !important;
+            backdrop-filter: blur(30px) !important;
+            box-shadow: 0 0 60px rgba(0, 217, 255, 0.2), 0 30px 60px rgba(0,0,0,0.8) !important;
+            border-radius: 24px !important;
+        }
+
+        .swal2-title {
+            color: var(--neon-blue) !important;
+            font-family: 'Poppins', sans-serif !important;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.4) !important;
+        }
+
+        .swal2-html-container {
+            color: var(--text-primary) !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        .swal2-confirm, .swal2-cancel {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 700 !important;
+            border-radius: 12px !important;
+            transition: all 0.25s ease !important;
+        }
+
+        .swal2-confirm {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)) !important;
+            box-shadow: 0 0 20px rgba(255, 27, 109, 0.4) !important;
+        }
+
+        .swal2-confirm:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(255, 27, 109, 0.6) !important;
+        }
+
+        .swal2-cancel {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1.5px solid var(--neon-blue) !important;
+            color: var(--neon-blue) !important;
+        }
+
+        .swal2-cancel:hover {
+            background: rgba(0, 217, 255, 0.12) !important;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.25) !important;
+        }
+
+        .swal2-input {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1.5px solid var(--neon-blue) !important;
+            color: var(--text-primary) !important;
+            border-radius: 10px !important;
+        }
+
+        /* ==================== SECCIÓN BUZÓN DE CARTAS ==================== */
+        .buzon-section {
+            background: linear-gradient(135deg, rgba(255, 27, 109, 0.07), rgba(0, 217, 255, 0.07));
+            border: 1.5px solid rgba(255, 27, 109, 0.22);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: 0 0 30px rgba(255, 27, 109, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: all 0.35s ease;
+        }
+
+        .buzon-section:hover {
+            box-shadow: 0 0 40px rgba(255, 27, 109, 0.14);
+            border-color: rgba(255, 27, 109, 0.38);
+        }
+
+        .buzon-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .buzon-form textarea {
+            width: 100%;
+            min-height: 110px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 27, 109, 0.3);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95em;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .buzon-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            background: rgba(255, 27, 109, 0.06);
+            box-shadow: 0 0 20px rgba(255, 27, 109, 0.15);
+        }
+
+        .buzon-form select,
+        .buzon-form input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(0, 217, 255, 0.25);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .buzon-form select option {
+            background: #1a0a2e;
+            color: white;
+        }
+
+        .buzon-form select:focus,
+        .buzon-form input[type="text"]:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            background: rgba(0, 217, 255, 0.06);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.15);
+        }
+
+        .buzon-form input::placeholder {
+            color: rgba(160, 160, 176, 0.6);
+        }
+
+        .btn-enviar-carta {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 14px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 27, 109, 0.35);
+            width: 100%;
+        }
+
+        .btn-enviar-carta:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 35px rgba(255, 27, 109, 0.55);
+        }
+
+        .btn-enviar-carta:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .cartas-muro {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .cartas-muro-titulo {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 5px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+        }
+
+        .carta-card {
+            background: linear-gradient(135deg, rgba(12, 12, 24, 0.85), rgba(20, 8, 38, 0.85));
+            border: 1.5px solid rgba(255, 27, 109, 0.3);
+            border-radius: 16px;
+            padding: 18px;
+            position: relative;
+            animation: cartaAppear 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .carta-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 27, 109, 0.4), transparent);
+        }
+
+        @keyframes cartaAppear {
+            from { opacity: 0; transform: translateY(15px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .carta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .carta-fecha {
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .btn-eliminar-carta {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            color: rgba(255, 100, 100, 0.8);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 0.75em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 600;
+        }
+
+        .btn-eliminar-carta:hover {
+            background: rgba(255, 77, 77, 0.2);
+            border-color: rgba(255, 77, 77, 0.6);
+            color: #ff6464;
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.2);
+        }
+
+        .carta-texto {
+            font-size: 0.95em;
+            line-height: 1.65;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            word-break: break-word;
+        }
+
+        .carta-sticker {
+            margin-top: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 180px;
+        }
+
+        .carta-sticker img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .buzon-vacio {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            padding: 20px;
+            opacity: 0.6;
+        }
+
+        /* ==================== RULETA VISUAL ==================== */
+        .ruleta-display {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(0, 217, 255, 0.4);
+            border-radius: 16px;
+            padding: 25px 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--neon-pink);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 25px 15px 20px;
+            margin-top: 10px;
+        }
+
+        .footer-inner {
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.7), rgba(20, 5, 35, 0.7));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(20px);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: 0.8em;
+            color: rgba(160, 160, 176, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .btn-reset {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(160, 160, 176, 0.5);
+            border-radius: 10px;
+            padding: 7px 16px;
+            font-size: 0.75em;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 77, 77, 0.1);
+            border-color: rgba(255, 77, 77, 0.3);
+            color: rgba(255, 120, 120, 0.8);
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.1);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 600px) {
+            .container { margin: 15px auto; padding: 10px; }
+            .card { padding: 22px 15px; border-radius: 20px; }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .hamster-img { width: 160px; height: 160px; }
+            .tiempo-grande { font-size: 2.2em; }
+            .reward-grid, .games-grid { grid-template-columns: 1fr; }
+            .continue-buttons { gap: 12px; }
+            .btn-continue { padding: 10px 20px; font-size: 0.95em; flex: 1; min-width: 130px; }
+            .secret-chest { width: 50px; height: 50px; font-size: 1.5em; bottom: 20px; right: 20px; }
+            .theme-toggle { width: 45px; height: 45px; font-size: 1.2em; }
+            .final-image { width: 200px; height: 200px; }
+            .final-message { font-size: 0.9em; padding: 20px; }
+            .polaroid-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+            .bg-orb { display: none; }
+        }
+
+        @media (max-width: 400px) {
+            h1 { font-size: 1.7em; }
+            .hamster-img { width: 140px; height: 140px; }
+            .tiempo-grande { font-size: 1.8em; }
+            .card { padding: 15px 12px; }
+            .btn-extraño { padding: 12px 20px; font-size: 1em; }
+            .games-grid { grid-template-columns: 1fr; }
+            .polaroid-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orbs de fondo -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <!-- Fondo Animado (partículas) -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+
+    <!-- Tema Toggle -->
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+        <div class="card">
+            <!-- Imagen Principal -->
+            <div class="hamster-container">
+                <img src="https://i.pinimg.com/736x/43/7e/9c/437e9c26942e45d650159e45a3a9df80.jpg" class="hamster-img" id="hamsterImg" alt="Nosotros">
+            </div>
+
+            <!-- Título -->
+            <h1>¡Hola, mi dúo favorito! ✨</h1>
+            <p class="subtitle">Cada día jugando contigo es el mejor día 💕</p>
+
+            <!-- Contador de Tiempo -->
+            <div class="contador-section">
+                <p>Llevas siendo mi persona favorita</p>
+                <div class="tiempo-grande" id="tiempoGrande">0 días</div>
+                <div class="tiempo-real">
+                    <span id="tiempoReal">00:00:00</span>
+                </div>
+                <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 10px;">📅 Iniciamos: 1 de marzo de 2026 a las 12:50 PM</div>
+            </div>
+
+            <!-- Sección Te Extraño -->
+            <div class="extraño-section">
+                <h3>💔 Te Extraño Mucho</h3>
+                <div class="extraño-counter" id="extrañoCounter">0</div>
+                <button class="btn-extraño" onclick="clickExtraño()">Te extraño 🥺</button>
+            </div>
+
+            <!-- Sección de Minijuegos -->
+            <div class="games-section">
+                <h3>🎮 Minijuegos</h3>
+                <div class="games-grid">
+                    <div class="game-item" onclick="iniciarJuegoAtrapar()">
+                        <div class="game-title">⚡ Atrapar</div>
+                        <div class="game-desc">15 seg. Hasta 50 pts</div>
+                    </div>
+                    <div class="game-item" onclick="iniciarJuegoMemoria()">
+                        <div class="game-title">🧠 Memoria</div>
+                        <div class="game-desc">30 seg. Hasta 75 pts</div>
+                    </div>
+                    <div class="game-item" onclick="juegoAdivinaNumero()">
+                        <div class="game-title">🔢 Adivina</div>
+                        <div class="game-desc">3 intentos, 30 pts</div>
+                    </div>
+                    <div class="game-item" onclick="juegoRuletaPremios()">
+                        <div class="game-title">🎡 Ruleta Premium</div>
+                        <div class="game-desc">Gira y gana premios</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tienda de Recompensas -->
+            <div class="shop-section">
+                <h3>🏆 Tienda de Recompensas</h3>
+                <div class="points-display">
+                    <div style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 8px;">Tus Puntos</div>
+                    <div class="points-number" id="pointsDisplay">0</div>
+                </div>
+                <div class="reward-grid">
+                    <div class="reward-item" id="reward1" onclick="comprarRecompensa(50, 'Elegir el próximo juego', 1)">
+                        <div class="reward-name">🎲 Elegir juego</div>
+                        <div class="reward-price">50 pts</div>
+                    </div>
+                    <div class="reward-item" id="reward2" onclick="comprarRecompensa(100, 'Dejarte ganar una partida', 2)">
+                        <div class="reward-name">🏆 Dejarte ganar</div>
+                        <div class="reward-price">100 pts</div>
+                    </div>
+                    <div class="reward-item" id="reward3" onclick="comprarRecompensa(200, 'Noche de desvelo', 3)">
+                        <div class="reward-name">🌙 Noche desvelo</div>
+                        <div class="reward-price">200 pts</div>
+                    </div>
+                    <div class="reward-item" id="reward4" onclick="comprarRecompensa(300, 'Testamento de amor', 4)">
+                        <div class="reward-name">💌 Testamento</div>
+                        <div class="reward-price">300 pts</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Frases -->
+            <div class="frases-section">
+                <h3>💖 Dime algo lindo</h3>
+                <div class="frase-contenedor">
+                    <p class="frase-texto" id="fraseContenedor">Eres mi dúo favorito</p>
+                </div>
+                <button class="btn-frase" onclick="mostrarFraseLinda()">Dime algo lindo 💖</button>
+            </div>
+
+            <!-- Sección Razones -->
+            <div class="razones-section">
+                <h3>💗 Razones por las que te amo</h3>
+                <div class="razon-item">❤️ Porque tu sonrisa ilumina mi día</div>
+                <div class="razon-item">❤️ Por tu bondad y generosidad</div>
+                <div class="razon-item">❤️ Porque eres mi persona favorita</div>
+                <div class="razon-item">❤️ Por los momentos especiales juntos</div>
+                <div class="razon-item">❤️ Haces que cualquier juego sea el mejor</div>
+                <div class="razon-item">❤️ Me encanta hablar contigo todos los días</div>
+            </div>
+
+            <!-- Sección Timeline -->
+            <div class="timeline-section">
+                <h3>📖 Nuestra Historia</h3>
+                <div class="timeline-text">
+                    <p style="margin-bottom: 12px;"><strong>✨ El Inicio:</strong> Ese primer mensaje donde todo comenzó...</p>
+                    <p style="margin-bottom: 12px;"><strong>🎮 Haciendo Equipo:</strong> Cuando descubrimos que somos el mejor dúo para jugar juntos.</p>
+                    <p style="margin-bottom: 12px;"><strong>💬 Las Pláticas:</strong> Todas esas horas hablando de todo y de nada, madrugadas inolvidables.</p>
+                    <p><strong>💕 Oficialmente Juntos:</strong> 1 de marzo de 2026, el inicio de esta aventura hermosa contigo.</p>
+                </div>
+            </div>
+
+            <!-- Sección Polaroid -->
+            <div class="polaroid-section">
+                <h3>📸 Nuestras Capturas Favoritas</h3>
+                <div class="polaroid-grid">
+                    <div class="polaroid" onclick="abrirModal('Haciendo tonterías 🎮')">
+                        <div class="polaroid-img">
+                            <img src="https://via.placeholder.com/200?text=Tonterías+en+juego" alt="Juegos">
+                        </div>
+                        <div class="polaroid-text">Haciendo tonterías</div>
+                    </div>
+                    <div class="polaroid" onclick="abrirModal('Nuestros avatares ✨')">
+                        <div class="polaroid-img">
+                            <img src="https://via.placeholder.com/200?text=Nuestros+avatares" alt="Avatares">
+                        </div>
+                        <div class="polaroid-text">Nuestros avatares</div>
+                    </div>
+                    <div class="polaroid" onclick="abrirModal('Tú carreando 🏆')">
+                        <div class="polaroid-img">
+                            <img src="https://via.placeholder.com/200?text=Carreando" alt="Carreando">
+                        </div>
+                        <div class="polaroid-text">Tú carreando</div>
+                    </div>
+                    <div class="polaroid" onclick="abrirModal('Madrugadas 🌙')">
+                        <div class="polaroid-img">
+                            <img src="https://via.placeholder.com/200?text=Madrugadas" alt="Madrugadas">
+                        </div>
+                        <div class="polaroid-text">Madrugadas</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Spotify -->
+            <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.07), rgba(0, 255, 136, 0.07)); border: 1.5px solid rgba(0, 217, 255, 0.18); border-radius: 20px; padding: 20px; margin: 25px 0; backdrop-filter: blur(20px); box-shadow: 0 0 20px rgba(0, 217, 255, 0.07); transition: all 0.35s ease;">
+                <h3>🎵 Nuestra Canción</h3>
+                <div style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.3); margin-top: 15px;">
+                    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5HCGrYR7g9u2X9Ju83yQLm?utm_source=generator" width="100%" height="90" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- ==================== NUEVA SECCIÓN: BUZÓN DE CARTAS ==================== -->
+            <div class="buzon-section">
+                <h3>💌 Nuestro Buzón</h3>
+                <p style="font-size: 0.88em; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.5;">Escríbeme una carta digital 💕 Se guardará aquí para siempre y me llegará una notificación.</p>
+
+                <div class="buzon-form" id="buzonForm">
+                    <textarea id="cartaTexto" placeholder="Escribe tu carta aquí... ✍️ Cuéntame algo lindo, recuérdame un momento especial, o simplemente di lo que sientes 💕"></textarea>
+                    <select id="cartaFuente">
+                        <option value="'Poppins', sans-serif">✏️ Poppins (Normal)</option>
+                        <option value="'Comic Sans MS', cursive">'Comic Sans' (Divertida)</option>
+                        <option value="cursive">✒️ Cursiva (Elegante)</option>
+                        <option value="Georgia, serif">📜 Serif (Clásica)</option>
+                    </select>
+                    <input type="text" id="cartaSticker" placeholder="🖼️ URL de imagen o sticker (opcional)">
+                    <button class="btn-enviar-carta" onclick="enviarCarta()">💌 Enviar Carta</button>
+                </div>
+
+                <div id="muroCartas">
+                    <div class="cartas-muro-titulo" id="murotitulo" style="display:none;">📬 Cartas Enviadas</div>
+                    <div class="cartas-muro" id="listaCartas"></div>
+                </div>
+            </div>
+
+            <!-- Sección Continuar Relación -->
+            <div class="continue-section">
+                <h2>¿Quieres seguir conmigo? 💕</h2>
+                <div class="continue-buttons">
+                    <button class="btn-continue btn-yes-continue" onclick="clickSiContinuar()">¡SÍ, CLARO!</button>
+                    <button class="btn-continue btn-no-continue" id="noContinueBtn" onclick="clickNoContinuar()">No</button>
+                </div>
+            </div>
+
+            <!-- Sección Terminar -->
+            <div class="terminar-section">
+                <h3>¿Terminar? 💔</h3>
+                <button class="btn-terminar" onclick="iniciarFlujoDespedida()">Terminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER CON BOTÓN DE RESET -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-text">Hecho con 💕 para Camila · Jhamir</div>
+            <button class="btn-reset" onclick="reiniciarTodo()">🔄 Reiniciar Todo</button>
+        </div>
+    </footer>
+
+    <!-- Pantalla Final Dramática -->
+    <div class="final-screen" id="finalScreen">
+        <img src="https://i.pinimg.com/736x/a3/f8/6b/a3f86b6234eb99c918b3a7e7887af1fd.jpg" class="final-image" alt="Final">
+        <div class="final-message" id="finalMessage"></div>
+        <div class="final-form" id="finalForm"></div>
+        <div class="continue-response-section" id="continueResponseSection" style="display: none;">
+            <div class="response-message">¡Gracias por tu respuesta, omega! 💕</div>
+            <button onclick="location.reload()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 15px;">Volver al inicio</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); animation: fadeIn 0.3s;">
+        <div style="background: linear-gradient(135deg, rgba(12, 12, 22, 0.97), rgba(22, 8, 40, 0.97)); margin: 10% auto; padding: 30px; border-radius: 24px; width: 90%; max-width: 450px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 217, 255, 0.15); border: 1.5px solid rgba(0, 217, 255, 0.25); text-align: center; backdrop-filter: blur(30px);">
+            <span onclick="closeModal()" style="float: right; font-size: 28px; font-weight: bold; color: var(--neon-pink); cursor: pointer; line-height: 1;">×</span>
+            <h2 id="modalTitle" style="color: var(--neon-blue); margin-bottom: 15px;"></h2>
+            <p id="modalContent" style="color: var(--text-secondary); margin-bottom: 15px;"></p>
+            <p id="modalEmoji" style="font-size: 3em; margin-top: 20px;">❤️</p>
+        </div>
+    </div>
+
+    <!-- Cofre Secreto -->
+    <div class="secret-chest" onclick="abrirCofre()">🔒</div>
+
+    <!-- ==================== SCRIPT ==================== -->
+    <script>
+        // ==================== CONFIGURACIÓN ====================
+        const FORMSPREE_ID = 'mlgojdza';
+        const RELACION_INICIO = new Date('2026-03-01T12:50:00');
+        const CONTRASENA_COFRE = 'juegos';
+
+        let points = localStorage.getItem('puntos') ? parseInt(localStorage.getItem('puntos')) : 0;
+        let extrañoCount = localStorage.getItem('extrañoCount') ? parseInt(localStorage.getItem('extrañoCount')) : 0;
+        let noClickCount = 0;
+        let continueRelationShown = false;
+
+        // ==================== FRASES "NO" (10 frases, Swal cada 5 clics) ====================
+        const frasesNoBtn = [
+            '¿Tanto te urge decir no? 🤨',
+            '¡Ay! Me lastimaste el botón 💔',
+            'Eso fue muy mal click... 😒',
+            'Oye, ¿en serio? Intenta con el otro botón 🙄',
+            'Mi botón tiene sentimientos, ¿sabes? 😤',
+            'Qué terca eres... pero igual te quiero 😅',
+            '¿Acaso tus deditos resbalaron? 😇',
+            'No te vas a deshacer de mí tan fácil 😎',
+            '¿Un récord de rechazos? 🏆 Impresionante.',
+            '¡Sigue intentando! (Mentira, dale al Sí) 😜'
+        ];
+
+        const mensajesSwlNo = {
+            5:  { title: '¿Ya 5 veces? 👀',    html: '¿Tanto te urge decir no? Vamos, dale al Sí 🥺' },
+            10: { title: '10 rechazos... 💔',   html: 'Ush, ¿tanto quieres al otro? jk, vuelve conmigo 😒' },
+            15: { title: '¡15! Oye...',          html: '¡Me estás lastimando el botón! Tiene sentimientos 😭' },
+            20: { title: 'Click #20 🤦',         html: 'En serio... dale al otro botón. TE LO IMPLORO. 🙄' },
+            25: { title: 'Qué terca, eh... 😤', html: 'Ya llevamos 25. ¿Cuándo paras? Nunca? Ok. 🚩' },
+            30: { title: '30 clics 🚀',          html: 'Oficialmente eres la campeona de los rechazos 🏆' },
+            35: { title: '35... 🫠',             html: 'No te vas a deshacer de mí así, chaparrita 😎' },
+            40: { title: '¡40! 🎖️',             html: '¿Acaso tus deditos resbalaron 40 veces? 😇' },
+            45: { title: 'Ya casi 50... 😱',     html: '¿En serio vas a llegar a 50? Cuéntame 👀' },
+            50: { title: '50 RECHAZOS 🎉',       html: '¡Nuevo récord! Pero igual te amo, omega 😜💕' }
+        };
+
+        const frasesLindas = [
+            "Eres mi dúo favorito",
+            "Me encanta hablar contigo todos los días",
+            "Haces que cualquier juego sea el mejor",
+            "Amo nuestras pláticas random",
+            "Eres mi jugadora favorita",
+            "Me haces reír sin parar",
+            "Eras exactamente lo que necesitaba",
+            "Contigo todo tiene más sentido",
+            "Eres increíble, en serio",
+            "Mi vida es mejor contigo en ella"
+        ];
+
+        const sonidos = {
+            click: 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBg==',
+            victoria: 'data:audio/wav;base64,UklGRpIEAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQIBAAAAAA==',
+            error: 'data:audio/wav;base64,UklGRmYEAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQIBAAAAAA=='
+        };
+
+        // ==================== FUNCIONES INICIALES ====================
+        function reproducirSonido(tipo) {
+            try {
+                const audio = new Audio(sonidos[tipo]);
+                audio.volume = 0.3;
+                audio.play().catch(() => {});
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            crearPartículas();
+            actualizarTiempoReal();
+            actualizarPuntos();
+            actualizarExtraño();
+            renderizarCartas();
+            setInterval(actualizarTiempoReal, 1000);
+        });
+
+        function crearPartículas() {
+            const bg = document.getElementById('backgroundAnimation');
+            const tipos = ['particle-dot', 'particle-heart', 'particle-star'];
+            const contenidos = { 'particle-heart': '💗', 'particle-star': '✦', 'particle-dot': '' };
+
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+                particle.className = 'particle ' + tipo;
+
+                const size = 2 + Math.random() * 4;
+                particle.style.width  = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left   = Math.random() * 100 + '%';
+                particle.style.bottom = '-20px';
+
+                const duration = 15 + Math.random() * 20;
+                const delay    = Math.random() * 18;
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay    = '-' + delay + 's';
+                particle.style.opacity = (0.3 + Math.random() * 0.5).toString();
+
+                if (tipo === 'particle-heart') {
+                    particle.textContent = contenidos['particle-heart'];
+                    particle.style.fontSize = (10 + Math.random() * 8) + 'px';
+                    particle.style.width  = 'auto';
+                    particle.style.height = 'auto';
+                }
+                if (tipo === 'particle-star') {
+                    particle.textContent = contenidos['particle-star'];
+                    particle.style.fontSize = size + 'px';
+                    particle.style.width  = 'auto';
+                    particle.style.height = 'auto';
+                    particle.style.color = 'rgba(255, 200, 0, 0.7)';
+                    particle.style.background = 'none';
+                    particle.style.boxShadow  = 'none';
+                }
+
+                bg.appendChild(particle);
+            }
+        }
+
+        // ==================== TIEMPO REAL ====================
+        function actualizarTiempoReal() {
+            const ahora = new Date();
+            const diferencia = ahora - RELACION_INICIO;
+            const dias     = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas    = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos  = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById('tiempoGrande').textContent = `${dias} días`;
+            document.getElementById('tiempoReal').textContent =
+                `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+        }
+
+        // ==================== TE EXTRAÑO ====================
+        function clickExtraño() {
+            extrañoCount++;
+            localStorage.setItem('extrañoCount', extrañoCount);
+            actualizarExtraño();
+            reproducirSonido('victoria');
+            mostrarNotificacion('Te extraño también 💕');
+
+            if (extrañoCount === 15) {
+                Swal.fire({ icon: 'question', title: 'Espera...', html: 'ajam asi como le extrañas al otro?, de seguro te confundiste 🤨', confirmButtonText: 'jeje ci', confirmButtonColor: '#ff1b6d' });
+            } else if (extrañoCount === 30) {
+                Swal.fire({ icon: 'info', title: 'Ya pasaste los 30 clics', html: '¿En serio me extrañas tanto? 💕 (o tal vez tu dedo está pegado jsjs)', confirmButtonText: 'A veces', confirmButtonColor: '#ff1b6d' });
+            } else if (extrañoCount === 50) {
+                Swal.fire({ icon: 'success', title: '50 clics! 🎉', html: 'Bueno, definitivamente me extrañas 😭💕', confirmButtonText: 'Mucho', confirmButtonColor: '#ff1b6d' });
+            } else if (extrañoCount === 100) {
+                Swal.fire({ icon: 'info', title: '¡100 CLICS! 🏆', html: '¿Qué sigue? ¿Vas a romper el botón? 😜', confirmButtonText: 'Posiblemente', confirmButtonColor: '#ff1b6d' });
+            }
+        }
+
+        function actualizarExtraño() {
+            document.getElementById('extrañoCounter').textContent = extrañoCount;
+        }
+
+        // ==================== FRASES LINDAS ====================
+        function mostrarFraseLinda() {
+            const frase = frasesLindas[Math.floor(Math.random() * frasesLindas.length)];
+            const el = document.getElementById('fraseContenedor');
+            el.style.animation = 'none';
+            el.offsetHeight;
+            el.style.animation = '';
+            el.textContent = frase;
+            reproducirSonido('click');
+        }
+
+        // ==================== MINIJUEGOS ====================
+        let gameIntervals = [];
+
+        function limpiarIntervalos() {
+            gameIntervals.forEach(id => clearInterval(id));
+            gameIntervals = [];
+        }
+
+        function iniciarJuegoAtrapar() {
+            reproducirSonido('click');
+            let score = 0;
+            let timeLeft = 15;
+            gameIntervals = [];
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                const timerEl = Swal.getHtmlContainer()?.querySelector('#gameTimer');
+                if (timerEl) timerEl.textContent = `Tiempo: ${timeLeft}s`;
+                if (timeLeft === 0) {
+                    limpiarIntervalos();
+                    reproducirSonido('victoria');
+                    añadirPuntos(score);
+                    Swal.fire({ icon: 'success', title: `¡Ganaste ${score} puntos!`, confirmButtonColor: '#ff1b6d' });
+                }
+            }, 1000);
+            gameIntervals.push(timer);
+
+            const spawner = setInterval(() => {
+                if (timeLeft > 0) {
+                    const gameArea = document.getElementById('gameArea');
+                    if (!gameArea) return;
+                    const heart = document.createElement('div');
+                    heart.textContent = '❤️';
+                    heart.style.position   = 'absolute';
+                    heart.style.fontSize   = '30px';
+                    heart.style.left       = Math.random() * (gameArea.clientWidth - 40) + 'px';
+                    heart.style.top        = '-40px';
+                    heart.style.cursor     = 'pointer';
+                    heart.style.transition = 'all 0.1s';
+                    heart.onclick = (e) => {
+                        e.stopPropagation();
+                        score += 5;
+                        const scoreEl = Swal.getHtmlContainer()?.querySelector('#gameScore');
+                        if (scoreEl) scoreEl.textContent = `Puntos: ${score}`;
+                        heart.remove();
+                        reproducirSonido('click');
+                    };
+                    gameArea.appendChild(heart);
+                    let posY = -40;
+                    const fall = setInterval(() => {
+                        if (!gameArea.contains(heart)) { clearInterval(fall); return; }
+                        posY += 5;
+                        heart.style.top = posY + 'px';
+                        if (posY > gameArea.clientHeight) { heart.remove(); clearInterval(fall); }
+                    }, 50);
+                }
+            }, 400);
+            gameIntervals.push(spawner);
+
+            Swal.fire({
+                title: '⚡ Atrapar Corazones',
+                html: '<div id="gameArea" style="width:100%;height:280px;background:rgba(0,0,0,0.4);border-radius:12px;position:relative;overflow:hidden;border:2px solid #00d9ff;"></div><p id="gameTimer" style="margin-top:10px;color:#00d9ff;font-weight:700;">Tiempo: 15s</p><p id="gameScore" style="color:#00ff88;font-weight:bold;">Puntos: 0</p>',
+                didOpen: () => {},
+                willClose: () => { limpiarIntervalos(); },
+                confirmButtonText: 'Cerrar',
+                confirmButtonColor: '#ff1b6d'
+            });
+        }
+
+        function iniciarJuegoMemoria() {
+            reproducirSonido('click');
+            const pares = [
+                { emoji: '❤️', id: 1 }, { emoji: '💕', id: 2 },
+                { emoji: '💖', id: 3 }, { emoji: '💗', id: 4 }
+            ];
+            let tablero = [...pares, ...pares].sort(() => Math.random() - 0.5);
+            let flipped = [];
+            let matched = 0;
+            let timeLeft = 30;
+            let score = 0;
+            gameIntervals = [];
+
+            let gameHtml = '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0;">';
+            tablero.forEach((item, idx) => {
+                gameHtml += `<div onclick="window.flipMemory(${idx})" style="width:50px;height:50px;background:#00d4ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;transition:0.3s;color:transparent;user-select:none;" id="card${idx}">🤫</div>`;
+            });
+            gameHtml += '</div><p id="memoryTimer" style="color:#00d9ff;font-weight:700;">Tiempo: 30s</p><p id="memoryScore" style="color:#00ff88;font-weight:bold;">Parejas: 0/4</p>';
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                const timerEl = Swal.getHtmlContainer()?.querySelector('#memoryTimer');
+                if (timerEl) timerEl.textContent = `Tiempo: ${timeLeft}s`;
+                if (timeLeft === 0 || matched === 4) {
+                    clearInterval(timer);
+                    limpiarIntervalos();
+                    reproducirSonido('victoria');
+                    añadirPuntos(score);
+                    Swal.fire({ icon: 'success', title: `¡Ganaste ${score} puntos!`, confirmButtonColor: '#ff1b6d' });
+                }
+            }, 1000);
+            gameIntervals.push(timer);
+
+            window.flipMemory = function(idx) {
+                const card = Swal.getHtmlContainer()?.querySelector('#card' + idx);
+                if (!card || card.textContent !== '🤫' || flipped.length > 1) return;
+                card.textContent = tablero[idx].emoji;
+                card.style.color = 'inherit';
+                flipped.push({ idx, id: tablero[idx].id });
+                if (flipped.length === 2) {
+                    if (flipped[0].id === flipped[1].id) {
+                        matched++;
+                        score += 15;
+                        const scoreEl = Swal.getHtmlContainer()?.querySelector('#memoryScore');
+                        if (scoreEl) scoreEl.textContent = `Parejas: ${matched}/4`;
+                        flipped = [];
+                    } else {
+                        setTimeout(() => {
+                            const c1 = Swal.getHtmlContainer()?.querySelector('#card' + flipped[0].idx);
+                            const c2 = Swal.getHtmlContainer()?.querySelector('#card' + flipped[1].idx);
+                            if (c1) { c1.textContent = '🤫'; c1.style.color = 'transparent'; }
+                            if (c2) { c2.textContent = '🤫'; c2.style.color = 'transparent'; }
+                            flipped = [];
+                        }, 500);
+                    }
+                }
+            };
+
+            Swal.fire({
+                title: '🧠 Juego de Memoria',
+                html: gameHtml,
+                willClose: () => { limpiarIntervalos(); },
+                confirmButtonText: 'Cerrar',
+                confirmButtonColor: '#ff1b6d'
+            });
+        }
+
+        // ==================== NUEVO: ADIVINA EL NÚMERO ====================
+        function juegoAdivinaNumero() {
+            reproducirSonido('click');
+            const numeroSecreto = Math.floor(Math.random() * 10) + 1;
+            let intentos = 3;
+
+            const preguntarNumero = () => {
+                Swal.fire({
+                    title: '🔢 Adivina el Número',
+                    html: `<p style="color:var(--text-secondary);margin-bottom:8px;">Pienso en un número del <strong style="color:#00d9ff;">1 al 10</strong></p><p style="color:#ff6e91;font-weight:700;">Intentos restantes: ${intentos} ${'💖'.repeat(intentos)}</p>`,
+                    input: 'number',
+                    inputAttributes: { min: 1, max: 10, step: 1, placeholder: 'Escribe un número...' },
+                    confirmButtonText: 'Adivinar 🎯',
+                    confirmButtonColor: '#ff1b6d',
+                    showCancelButton: true,
+                    cancelButtonText: 'Rendirse 🏳️',
+                    inputValidator: (value) => {
+                        if (!value) return 'Escribe un número';
+                        const n = parseInt(value);
+                        if (n < 1 || n > 10) return 'Debe ser entre 1 y 10';
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const numero = parseInt(result.value);
+                        if (numero === numeroSecreto) {
+                            reproducirSonido('victoria');
+                            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+                            añadirPuntos(30);
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Acertaste! 🎉',
+                                html: `<p>El número era <strong style="color:#00d9ff;font-size:1.5em;">${numeroSecreto}</strong></p><p style="margin-top:10px;color:#00ff88;font-weight:700;">+30 puntos ganados 💰</p>`,
+                                confirmButtonColor: '#ff1b6d'
+                            });
+                        } else {
+                            intentos--;
+                            if (intentos > 0) {
+                                reproducirSonido('error');
+                                const pista = numero < numeroSecreto ? '⬆️ El número es <strong>MAYOR</strong>' : '⬇️ El número es <strong>MENOR</strong>';
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Incorrecto 😅',
+                                    html: `<p>${pista}</p><p style="margin-top:8px;color:rgba(160,160,176,0.8);">Intentos restantes: ${intentos}</p>`,
+                                    confirmButtonColor: '#ff1b6d',
+                                    confirmButtonText: 'Intentar de nuevo'
+                                }).then(() => preguntarNumero());
+                            } else {
+                                reproducirSonido('error');
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: 'Game Over 💔',
+                                    html: `<p>El número era <strong style="color:#ff1b6d;font-size:1.5em;">${numeroSecreto}</strong></p><p style="margin-top:8px;color:rgba(160,160,176,0.8);">¡Mejor suerte la próxima!</p>`,
+                                    confirmButtonColor: '#ff1b6d'
+                                });
+                            }
+                        }
+                    } else {
+                        Swal.fire({ icon: 'info', title: 'Era el ' + numeroSecreto + ' 👀', html: '¡La próxima lo adivinas!', confirmButtonColor: '#ff1b6d' });
+                    }
+                });
+            };
+
+            preguntarNumero();
+        }
+
+        // ==================== NUEVO: RULETA DE PREMIOS VISUAL ====================
+        function juegoRuletaPremios() {
+            reproducirSonido('click');
+
+            const premios = [
+                { texto: '💋 Beso virtual',         emoji: '💋', puntos: 0  },
+                { texto: '🤗 Abrazo eterno',         emoji: '🤗', puntos: 0  },
+                { texto: '🎟️ Vale por una cita',    emoji: '🎟️', puntos: 0  },
+                { texto: '🌙 Noche de desvelo',      emoji: '🌙', puntos: 0  },
+                { texto: '⭐ 35 puntos bonus',       emoji: '⭐', puntos: 35 },
+                { texto: '💰 20 puntos bonus',       emoji: '💰', puntos: 20 },
+                { texto: '🎁 Sorpresa especial',     emoji: '🎁', puntos: 50 },
+                { texto: '💖 Mensaje de amor',       emoji: '💖', puntos: 0  }
+            ];
+
+            const ganador = premios[Math.floor(Math.random() * premios.length)];
+            let indiceActual = 0;
+            let velocidad = 80;
+            let intervalId = null;
+            let tiempoTranscurrido = 0;
+            const duracionTotal = 2500;
+
+            const ruletaHtml = `
+                <p style="color:var(--text-secondary);margin-bottom:12px;font-size:0.9em;">¡Girando la ruleta! 🎡</p>
+                <div id="ruletaDisplay" style="
+                    background:rgba(0,0,0,0.5);
+                    border:2px solid rgba(0,217,255,0.5);
+                    border-radius:16px;
+                    padding:22px 15px;
+                    text-align:center;
+                    font-size:1.5em;
+                    font-weight:800;
+                    color:#ff006e;
+                    min-height:80px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    box-shadow:0 0 30px rgba(0,217,255,0.2);
+                    text-shadow:0 0 15px rgba(255,0,110,0.5);
+                    transition:all 0.1s ease;
+                ">🎡 ¡Girando!</div>
+                <div id="ruletaBarra" style="margin-top:14px;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;">
+                    <div id="ruletaProgreso" style="height:100%;width:0%;background:linear-gradient(90deg,#ff006e,#00d9ff);border-radius:3px;transition:width 0.1s linear;"></div>
+                </div>
+            `;
+
+            Swal.fire({
+                title: '🎡 Ruleta de Premios',
+                html: ruletaHtml,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    const display   = document.getElementById('ruletaDisplay');
+                    const progreso  = document.getElementById('ruletaProgreso');
+
+                    const girar = () => {
+                        tiempoTranscurrido += velocidad;
+                        const porcentaje = Math.min((tiempoTranscurrido / duracionTotal) * 100, 100);
+                        if (progreso) progreso.style.width = porcentaje + '%';
+
+                        if (tiempoTranscurrido >= duracionTotal) {
+                            clearInterval(intervalId);
+                            if (display) {
+                                display.textContent = ganador.emoji + ' ' + ganador.texto;
+                                display.style.color = '#00ff88';
+                                display.style.textShadow = '0 0 20px rgba(0,255,136,0.6)';
+                                display.style.borderColor = 'rgba(0,255,136,0.5)';
+                            }
+                            setTimeout(() => {
+                                if (ganador.puntos > 0) {
+                                    reproducirSonido('victoria');
+                                    añadirPuntos(ganador.puntos);
+                                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                                } else {
+                                    reproducirSonido('victoria');
+                                }
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '🎉 ¡Premio obtenido!',
+                                    html: `<p style="font-size:1.8em;margin:10px 0;">${ganador.emoji}</p><p style="font-size:1.1em;color:#ff006e;font-weight:700;">${ganador.texto}</p>${ganador.puntos > 0 ? `<p style="color:#00ff88;margin-top:8px;font-weight:700;">+${ganador.puntos} puntos 💰</p>` : ''}`,
+                                    confirmButtonColor: '#ff1b6d'
+                                });
+                            }, 600);
+                            return;
+                        }
+
+                        const item = premios[indiceActual % premios.length];
+                        if (display) {
+                            display.textContent = item.emoji + ' ' + item.texto;
+                        }
+                        indiceActual++;
+
+                        if (tiempoTranscurrido > duracionTotal * 0.6) {
+                            velocidad = 80 + Math.floor((tiempoTranscurrido / duracionTotal) * 200);
+                            clearInterval(intervalId);
+                            intervalId = setInterval(girar, velocidad);
+                        }
+                    };
+
+                    intervalId = setInterval(girar, velocidad);
+                },
+                willClose: () => {
+                    if (intervalId) clearInterval(intervalId);
+                }
+            });
+        }
+
+        // ==================== PUNTOS ====================
+        function añadirPuntos(cantidad) {
+            points += cantidad;
+            localStorage.setItem('puntos', points);
+            actualizarPuntos();
+            mostrarNotificacion(`+${cantidad} puntos 💰`);
+        }
+
+        function actualizarPuntos() {
+            document.getElementById('pointsDisplay').textContent = points;
+            document.querySelectorAll('.reward-item').forEach((item, idx) => {
+                const precios = [50, 100, 200, 300];
+                if (points < precios[idx]) {
+                    item.classList.add('locked');
+                } else {
+                    item.classList.remove('locked');
+                }
+            });
+        }
+
+        function comprarRecompensa(precio, nombre, id) {
+            if (points < precio) {
+                reproducirSonido('error');
+                mostrarNotificacion('No tienes suficientes puntos 😅');
+                return;
+            }
+            Swal.fire({
+                icon: 'success',
+                title: '¡Recompensa desbloqueada! 🎫',
+                html: `<p style="font-size:1.1em;color:#00ff88;margin:20px 0;font-weight:bold;">${nombre}</p><p style="color:#b0b0b0;">-${precio} puntos</p>`,
+                confirmButtonColor: '#ff1b6d'
+            }).then(() => {
+                points -= precio;
+                localStorage.setItem('puntos', points);
+                actualizarPuntos();
+                reproducirSonido('victoria');
+            });
+        }
+
+        // ==================== CONTINUAR RELACIÓN (botón "No" mejorado) ====================
+        function clickNoContinuar() {
+            const btn = document.getElementById('noContinueBtn');
+            noClickCount++;
+
+            // Calcular posición segura con getBoundingClientRect
+            const rect   = btn.getBoundingClientRect();
+            const btnW   = rect.width  || 80;
+            const btnH   = rect.height || 40;
+            const margin = 20;
+
+            const safeMaxX = window.innerWidth  - btnW - margin;
+            const safeMaxY = window.innerHeight - btnH - margin;
+            const safeMinX = margin;
+            const safeMinY = margin;
+
+            const newX = Math.floor(Math.random() * (safeMaxX - safeMinX) + safeMinX);
+            const newY = Math.floor(Math.random() * (safeMaxY - safeMinY) + safeMinY);
+
+            btn.style.position   = 'fixed';
+            btn.style.left       = newX + 'px';
+            btn.style.top        = newY + 'px';
+            btn.style.zIndex     = '1000';
+            btn.style.transition = 'left 0.15s ease, top 0.15s ease';
+
+            // Cambiar texto del botón con frases divertidas
+            const fraseIndex = (noClickCount - 1) % frasesNoBtn.length;
+            btn.textContent = frasesNoBtn[fraseIndex];
+            setTimeout(() => { btn.textContent = 'No'; }, 1800);
+
+            reproducirSonido('click');
+
+            // Mostrar Swal exactamente cada 5 clics (5, 10, 15... hasta 50)
+            if (noClickCount <= 50 && noClickCount % 5 === 0 && mensajesSwlNo[noClickCount]) {
+                const msg = mensajesSwlNo[noClickCount];
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'question',
+                        title: msg.title,
+                        html: msg.html,
+                        confirmButtonColor: '#ff1b6d',
+                        confirmButtonText: '...ok jsjs'
+                    });
+                }, 200);
+            }
+        }
+
+        function clickSiContinuar() {
+            reproducirSonido('victoria');
+            const btn = document.getElementById('noContinueBtn');
+            btn.style.position   = 'relative';
+            btn.style.left       = '';
+            btn.style.top        = '';
+            btn.style.transition = '';
+            btn.style.display    = 'none';
+            document.querySelector('.btn-yes-continue').style.display = 'none';
+
+            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+
+            const continueSection = document.querySelector('.continue-section');
+            continueSection.innerHTML = `
+                <img src="https://i.pinimg.com/736x/ac/5a/1d/ac5a1d1485ca85cf60927030fcafd79f.jpg" style="width:100%;max-width:300px;border-radius:15px;margin-bottom:20px;box-shadow:0 0 30px rgba(0,217,255,0.4);">
+                <p style="font-size:1.2em;font-weight:700;color:var(--neon-pink);margin-bottom:15px;">jsjs yo sabia q querias, y nadie fue obligada omega jsjsjs 😏💕</p>
+            `;
+            continueRelationShown = true;
+            localStorage.setItem('continueRelationShown', 'true');
+        }
+
+        // ==================== FLUJO DESPEDIDA ====================
+        function iniciarFlujoDespedida() {
+            reproducirSonido('error');
+            Swal.fire({
+                title: '¿Segura de que quieres terminar?',
+                html: 'Dame una oportunidad 🥺',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, quiero terminar',
+                cancelButtonText: 'No, me quedo',
+                confirmButtonColor: '#ff4d5f',
+                cancelButtonColor: '#00d4ff'
+            }).then((result) => {
+                if (result.isConfirmed) paso2Despedida();
+                else mostrarNotificacion('Me asustaste 😅');
+            });
+        }
+
+        function paso2Despedida() {
+            Swal.fire({
+                title: '¿Segura que quieres terminar?',
+                imageUrl: 'https://i.pinimg.com/736x/4b/35/5e/4b355e6c1503e0c65184e8167586220d.jpg',
+                imageWidth: 300,
+                imageHeight: 300,
+                html: 'Piénsalo bien cami...',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, jhamir',
+                cancelButtonText: 'No',
+                confirmButtonColor: '#ff4d5f',
+                cancelButtonColor: '#00d4ff'
+            }).then((result) => {
+                if (result.isConfirmed) paso3Despedida();
+                else reproducirSonido('victoria');
+            });
+        }
+
+        function paso3Despedida() {
+            Swal.fire({
+                title: '¿Segura?',
+                html: 'Esta es tu última oportunidad 💔',
+                showCancelButton: true,
+                confirmButtonText: 'Estoy realmente segura, de esta decisión',
+                cancelButtonText: 'No, jsj bromita',
+                confirmButtonColor: '#ff4d5f',
+                cancelButtonColor: '#00d4ff'
+            }).then((result) => {
+                if (result.isConfirmed) mostrarPantallaFinal();
+                else {
+                    reproducirSonido('victoria');
+                    Swal.fire({ icon: 'success', title: 'ay casi me da un infarto 😭', confirmButtonColor: '#ff1b6d' });
+                }
+            });
+        }
+
+        function mostrarPantallaFinal() {
+            const finalScreen = document.getElementById('finalScreen');
+            const mensajeTexto = "Ok, cami, este noticia me llegara JSJSJ, ni c porq me terminaara... Gracx por todo si, te amo, perdoname si no te tuve tiempo, o tmpc te di tanta atencion, gracx por todo los momentos, y q llegaste a mi vida, aunq no creo q sea la mejor relacion q tengas, ni creo q sea, gracx igl, te deseo suerte en todo, y q seas feliz noo, gracx por ser mi omega, mi niña, te amo sii, sigue asi, cuidese, y q tu otra o prox relacion sea hermosa y bonita jsjsj... suerte con su vida amorosa, attentamente: jhamir.";
+
+            document.getElementById('finalMessage').textContent = mensajeTexto;
+            document.getElementById('finalForm').innerHTML = `
+                <div style="margin-bottom:15px;">
+                    <label style="color:var(--neon-blue);font-weight:700;display:block;margin-bottom:10px;">Tu última respuesta para mí:</label>
+                    <textarea id="finalResponse" placeholder="Escribe lo que sientes..." style="width:100%;height:120px;padding:15px;background:rgba(255,255,255,0.05);border:2px solid rgba(0,217,255,0.3);border-radius:12px;color:var(--text-primary);font-family:'Poppins',sans-serif;resize:none;margin-bottom:15px;"></textarea>
+                    <button onclick="enviarRespuestaFinal()" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;">Enviar</button>
+                </div>
+            `;
+            finalScreen.classList.add('active');
+            document.querySelector('.container').style.display = 'none';
+        }
+
+        function enviarRespuestaFinal() {
+            const respuesta = document.getElementById('finalResponse').value.trim();
+            if (!respuesta) {
+                reproducirSonido('error');
+                alert('Escribe algo para mí 💔');
+                return;
+            }
+            fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: '💔 MENSAJE FINAL DE CAMILA: ' + respuesta, email: 'noreply@example.com' })
+            }).then(() => {
+                reproducirSonido('victoria');
+                document.getElementById('finalForm').style.display = 'none';
+                document.getElementById('continueResponseSection').style.display = 'block';
+            }).catch(() => {
+                reproducirSonido('error');
+                alert('Error al enviar');
+            });
+        }
+
+        // ==================== COFRE SECRETO ====================
+        function abrirCofre() {
+            Swal.fire({
+                title: '🔒 Cofre Secreto',
+                html: '¿Cuál es la contraseña?',
+                input: 'password',
+                inputPlaceholder: 'Escribe la contraseña...',
+                showCancelButton: true,
+                confirmButtonText: 'Abrir',
+                confirmButtonColor: '#ff1b6d',
+                inputValidator: (value) => {
+                    if (!value) return 'Por favor escribe la contraseña';
+                    if (value !== CONTRASENA_COFRE) return 'Contraseña incorrecta ❌';
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    reproducirSonido('victoria');
+                    confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
+                    Swal.fire({
+                        title: '¡Vale Especial Desbloqueado! 🎫',
+                        html: '<p style="font-size:1.1em;color:#ff1b6d;margin:20px 0;">Válido por:</p><p style="font-size:1em;color:#fff;font-style:italic;">Mi promesa de que cuando por fin nos veamos en persona, te daré el abrazo más largo del mundo 🤗💕</p>',
+                        icon: 'success',
+                        confirmButtonColor: '#ff1b6d'
+                    });
+                }
+            });
+        }
+
+        // ==================== MODAL ====================
+        function abrirModal(titulo) {
+            document.getElementById('modalTitle').textContent  = titulo;
+            document.getElementById('modalContent').textContent = '¡Un momento especial nuestro! 💕';
+            document.getElementById('myModal').style.display   = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) modal.style.display = 'none';
+        };
+
+        // ==================== NOTIFICACIONES ====================
+        function mostrarNotificacion(texto) {
+            const notif = document.createElement('div');
+            notif.className  = 'notification';
+            notif.textContent = texto;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity   = '0';
+                notif.style.transform = 'translateX(-150px)';
+                notif.style.transition = 'all 0.4s ease';
+                setTimeout(() => notif.remove(), 400);
+            }, 2600);
+        }
+
+        // ==================== TEMA TOGGLE ====================
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // ==================== INTERACCIÓN HÁMSTER ====================
+        document.getElementById('hamsterImg')?.addEventListener('click', () => {
+            reproducirSonido('click');
+            mostrarNotificacion('¡Te amo también! 🐹💕');
+            const img = document.getElementById('hamsterImg');
+            img.style.transform = 'scale(0.95) rotate(-5deg)';
+            setTimeout(() => { img.style.transform = ''; }, 200);
+        });
+
+        // ==================== CARGAR ESTADO ====================
+        if (localStorage.getItem('continueRelationShown') === 'true') {
+            continueRelationShown = true;
+            clickSiContinuar();
+        }
+
+        // ==================== BUZÓN DE CARTAS ====================
+        function obtenerCartas() {
+            try {
+                return JSON.parse(localStorage.getItem('cartasDigitales') || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function guardarCartas(arr) {
+            localStorage.setItem('cartasDigitales', JSON.stringify(arr));
+        }
+
+        function renderizarCartas() {
+            const cartas     = obtenerCartas();
+            const lista      = document.getElementById('listaCartas');
+            const tituloMuro = document.getElementById('murotitulo');
+            if (!lista) return;
+
+            lista.innerHTML = '';
+
+            if (cartas.length === 0) {
+                if (tituloMuro) tituloMuro.style.display = 'none';
+                lista.innerHTML = '<div class="buzon-vacio">📭 Aún no hay cartas... ¡Escribe la primera! 💕</div>';
+                return;
+            }
+
+            if (tituloMuro) tituloMuro.style.display = 'block';
+
+            cartas.forEach((carta, index) => {
+                const div = document.createElement('div');
+                div.className = 'carta-card';
+
+                const stickerHTML = carta.stickerUrl
+                    ? `<div class="carta-sticker"><img src="${escapeHtml(carta.stickerUrl)}" alt="sticker" onerror="this.parentElement.style.display='none'"></div>`
+                    : '';
+
+                div.innerHTML = `
+                    <div class="carta-header">
+                        <span class="carta-fecha">💌 ${carta.fecha}</span>
+                        <button class="btn-eliminar-carta" onclick="eliminarCarta(${index})">✕ Borrar</button>
+                    </div>
+                    <div class="carta-texto" style="font-family:${carta.fuente};">${escapeHtml(carta.texto)}</div>
+                    ${stickerHTML}
+                `;
+                lista.appendChild(div);
+            });
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        function eliminarCarta(index) {
+            Swal.fire({
+                title: '¿Eliminar esta carta?',
+                html: 'Se borrará permanentemente 💔',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, borrar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#ff4d5f',
+                cancelButtonColor: '#00d4ff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const cartas = obtenerCartas();
+                    cartas.splice(index, 1);
+                    guardarCartas(cartas);
+                    renderizarCartas();
+                    mostrarNotificacion('Carta eliminada 🗑️');
+                }
+            });
+        }
+
+        function enviarCarta() {
+            const texto  = document.getElementById('cartaTexto').value.trim();
+            const fuente = document.getElementById('cartaFuente').value;
+            const sticker = document.getElementById('cartaSticker').value.trim();
+
+            if (!texto) {
+                reproducirSonido('error');
+                Swal.fire({ icon: 'warning', title: 'Espera...', html: 'Escribe algo en tu carta primero 💕', confirmButtonColor: '#ff1b6d' });
+                return;
+            }
+
+            const btn = document.querySelector('.btn-enviar-carta');
+            btn.disabled    = true;
+            btn.textContent = '📤 Enviando...';
+
+            const ahora  = new Date();
+            const fecha  = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+            const nuevaCarta = { texto, fuente, stickerUrl: sticker, fecha };
+
+            const cartas = obtenerCartas();
+            cartas.unshift(nuevaCarta);
+            guardarCartas(cartas);
+
+            fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tipo: '💌 Nueva Carta Digital',
+                    carta: texto,
+                    fuente: fuente,
+                    sticker: sticker || 'Sin imagen',
+                    fecha: fecha
+                })
+            }).catch(() => {});
+
+            document.getElementById('cartaTexto').value   = '';
+            document.getElementById('cartaSticker').value = '';
+            document.getElementById('cartaFuente').selectedIndex = 0;
+
+            btn.disabled    = false;
+            btn.textContent = '💌 Enviar Carta';
+
+            reproducirSonido('victoria');
+            renderizarCartas();
+            confetti({ particleCount: 60, spread: 50, origin: { y: 0.7 }, colors: ['#ff006e', '#b013f0', '#00d9ff'] });
+            mostrarNotificacion('¡Carta enviada! 💌');
+        }
+
+        // ==================== RESETEAR TODO ====================
+        function reiniciarTodo() {
+            Swal.fire({
+                title: '🔄 ¿Reiniciar Todo?',
+                html: '<p style="color:rgba(160,160,176,0.9);">Se borrarán todos los puntos, cartas y progreso guardado. Esta acción no se puede deshacer.</p>',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '✅ Sí, reiniciar',
+                cancelButtonText: '❌ Cancelar',
+                confirmButtonColor: '#ff4d5f',
+                cancelButtonColor: '#00d4ff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.clear();
+                    location.reload();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
