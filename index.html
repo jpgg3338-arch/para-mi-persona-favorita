@@ -658,6 +658,14 @@
                 <button style="flex: 1; min-width: 100px; font-size: 0.9em;" onclick="lloviaCorazones()">💕 Lluvia</button>
                 <button style="flex: 1; min-width: 100px; font-size: 0.9em;" onclick="resetearVales()">🔄 Reset</button>
             </div>
+            
+<div class="section">
+                <h3>🎮 Minijuegos</h3>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="juegoAdivinaNumero()" style="background: linear-gradient(135deg, #00d9ff, #b013f0);">🔢 Adivina el Número</button>
+                    <button onclick="juegoRuletaPremios()" style="background: linear-gradient(135deg, #ff006e, #ffaa00);">🎡 Ruleta de Premios</button>
+                </div>
+            </div>
 
             <!-- ⭐ NUEVA SECCIÓN: BUZÓN DE CARTAS ⭐ -->
             <div class="buzon-section">
@@ -800,29 +808,40 @@
             }
         }
 
+const frasesNo = [
+            "¿Tanto quieres decir no? 🤨",
+            "Ush, ¿tanto quieres al otro? 😒",
+            "¡Oye! Me estás lastimando el botón y mi corazón 💔",
+            "Ya, en serio, dale al 'Sí' 🙄",
+            "Qué terca eres, eh... 😤",
+            "Uy, qué mala onda 🚩",
+            "No te vas a deshacer de mí tan fácil 😎",
+            "Estás rompiendo un récord de rechazo 🏆",
+            "¿Acaso tus deditos resbalaron? Intenta de nuevo 😇",
+            "Bueno, ya, me rindo... ¡Mentira, sigue intentando! 😜"
+        ];
+
         function escaparBoton() {
             const btn = document.getElementById('noBtnGame');
             noClickCount++;
 
-            if (noClickCount > 5) {
+            if (noClickCount % 5 === 0 && noClickCount <= 50) {
+                let index = (noClickCount / 5) - 1;
                 Swal.fire({
-                    icon: 'question',
-                    title: '¿En serio?',
-                    html: 'ush tanto te urge estar con el otro 💔🙄',
-                    confirmButtonColor: '#ff1b6d'
+                    icon: 'warning',
+                    title: '¡Oye!',
+                    text: frasesNo[index],
+                    confirmButtonColor: '#00d9ff'
                 });
             }
 
             const rect = btn.getBoundingClientRect();
-            const maxX = Math.max(0, window.innerWidth - rect.width - 20);
-            const maxY = Math.max(0, window.innerHeight - rect.height - 20);
-
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
+            const maxX = Math.max(0, window.innerWidth - rect.width - 30);
+            const maxY = Math.max(0, window.innerHeight - rect.height - 30);
 
             btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            btn.style.left = (Math.random() * maxX) + 'px';
+            btn.style.top = (Math.random() * maxY) + 'px';
             btn.style.zIndex = '1000';
         }
 
@@ -970,7 +989,65 @@
             cargarCartas();
             mostrarNotificacion('Carta eliminada 🗑️');
         }
+        
+           // ==================== MINIJUEGOS NUEVOS ====================
+        async function juegoAdivinaNumero() {
+            let num = Math.floor(Math.random() * 10) + 1;
+            let intentos = 3;
+            
+            for(let i=0; i<3; i++) {
+                const { value: resp } = await Swal.fire({
+                    title: 'Adivina el Número 🔢',
+                    text: `Pensé un número del 1 al 10. Tienes ${intentos} intentos.`,
+                    input: 'number',
+                    inputAttributes: { min: 1, max: 10 },
+                    confirmButtonColor: '#ff1b6d',
+                    showCancelButton: true
+                });
+                
+                if (!resp) return;
+                
+                if (parseInt(resp) === num) {
+                    confetti();
+                    return Swal.fire('¡Ganaste! 🎉', '¡Adivinaste mi número!', 'success');
+                } else {
+                    intentos--;
+                    if(intentos > 0) {
+                        await Swal.fire('Fallaste', parseInt(resp) < num ? 'Mi número es MAYOR' : 'Mi número es MENOR', 'warning');
+                    }
+                }
+            }
+            Swal.fire('Game Over 😢', `El número era ${num}`, 'error');
+        }
 
+        function juegoRuletaPremios() {
+            const premios = ["¡Beso virtual! 💋", "Vale por un abrazo 🤗", "Te ganaste una peli 🎬", "10 puntos extra ⭐", "Sigue intentando 😅"];
+            let count = 0;
+            let interval;
+            
+            Swal.fire({
+                title: '🎡 Girando...',
+                html: '<h2 id="ruleta-res" style="color:#ff006e; font-size:1.5em; margin:20px;">🎲</h2>',
+                showConfirmButton: false,
+                didOpen: () => {
+                    const caja = Swal.getHtmlContainer().querySelector('#ruleta-res');
+                    interval = setInterval(() => {
+                        caja.textContent = premios[count % premios.length];
+                        count++;
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        clearInterval(interval);
+                        const ganador = premios[Math.floor(Math.random() * premios.length)];
+                        caja.textContent = ganador;
+                        Swal.update({ showConfirmButton: true, title: '¡Tu premio!' });
+                        if(ganador !== "Sigue intentando 😅") confetti();
+                    }, 2000);
+                },
+                willClose: () => clearInterval(interval)
+            });
+        }
+        
         // ==================== REINICIO DE PROGRESO ====================
         function confirmarReinicio() {
             Swal.fire({
